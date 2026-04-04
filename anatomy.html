@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+    <title>خرائط تشريحية للأسنان - العيادة السنية الحديثة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(145deg, #e0f2fe 0%, #f0f9ff 100%);
+            color: #1e2a3e;
+            line-height: 1.5;
+            padding: 16px 12px 40px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* رأس الصفحة */
+        .header {
+            background: white;
+            border-radius: 28px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .logo h1 {
+            font-size: 1.3rem;
+            color: #005f73;
+        }
+        .logo p {
+            font-size: 0.75rem;
+            color: #2c5f6e;
+        }
+        .back-btn {
+            background: #0b2b3b;
+            color: white;
+            text-decoration: none;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .back-btn:hover {
+            background: #e9c46a;
+            color: #1e3a5f;
+        }
+
+        /* عنوان الصفحة */
+        .page-title {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+        .page-title h2 {
+            font-size: 1.8rem;
+            color: #005f73;
+            border-bottom: 3px solid #e9c46a;
+            display: inline-block;
+            padding-bottom: 6px;
+        }
+        .page-title p {
+            font-size: 0.85rem;
+            margin-top: 8px;
+            color: #2c5f6e;
+        }
+
+        /* شبكة البطاقات - صف واحد في الهاتف، 2 في الشاشات الكبيرة */
+        .anatomy-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+
+        @media (min-width: 768px) {
+            .anatomy-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* البطاقة */
+        .card {
+            background: white;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            cursor: pointer;
+        }
+        .card:active {
+            transform: scale(0.98);
+        }
+        @media (hover: hover) {
+            .card:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 20px 30px rgba(0,0,0,0.12);
+            }
+        }
+
+        /* الصور - متجاوبة وتحافظ على نسبة العرض إلى الارتفاع 1024:576 ≈ 1.78 */
+        .card-img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1024 / 576;
+            object-fit: cover;
+            display: block;
+            background: #f1f5f9;
+        }
+
+        .card-content {
+            padding: 18px;
+        }
+        .card-content h3 {
+            font-size: 1.4rem;
+            color: #2a9d8f;
+            margin-bottom: 12px;
+            border-right: 4px solid #e9c46a;
+            padding-right: 12px;
+        }
+
+        /* المناطق التفاعلية (الأجزاء التشريحية) */
+        .interactive-area {
+            background: #f8fafc;
+            border-radius: 24px;
+            padding: 14px;
+            margin-top: 12px;
+            transition: all 0.2s;
+            border: 1px solid #e2e8f0;
+        }
+        .interactive-area:active {
+            background: #fff3e0;
+            border-color: #e9c46a;
+        }
+        @media (hover: hover) {
+            .interactive-area:hover {
+                background: #fff7e0;
+                border-color: #e9c46a;
+                transform: scale(1.01);
+            }
+        }
+
+        .part-name {
+            font-weight: 800;
+            font-size: 1.15rem;
+            color: #0b2b3b;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        .part-desc {
+            color: #334155;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+        .tooltip-icon {
+            font-size: 1rem;
+            background: #e9c46a;
+            width: 28px;
+            height: 28px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: #1e3a5f;
+        }
+
+        /* تذييل */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.75rem;
+            color: #5b6e8c;
+            border-top: 1px solid #cbd5e1;
+            margin-top: 20px;
+        }
+
+        /* تحسين اللمس */
+        button, .card, .interactive-area, .back-btn {
+            touch-action: manipulation;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <div class="logo">
+            <h1>🦷 العيادة السنية الحديثة</h1>
+            <p>د. محمد محمود الأحمد | التشريح التفاعلي</p>
+        </div>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-right"></i> العودة للمجلة</a>
+    </div>
+
+    <div class="page-title">
+        <h2>🧬 خرائط تشريحية للأسنان</h2>
+    </div>
+
+    <div class="anatomy-grid">
+        <!-- البطاقة 1: مقطع عرضي في السن (الصورة 5.jpg) -->
+        <div class="card">
+            <img src="images/5.jpg" alt="مقطع عرضي في السن" class="card-img" loading="lazy" onerror="this.src='https://placehold.co/1024x576?text=Tooth+Section+5.jpg'">
+            <div class="card-content">
+                <h3>🔬 مقطع عرضي في السن</h3>
+                <div class="interactive-area">
+                    <div class="part-name"><span class="tooltip-icon">🦷</span> المينا (Enamel)</div>
+                    <div class="part-desc">الطبقة الخارجية الصلبة، أصلب مادة في جسم الإنسان، تحمي السن من التسوس والتآكل. تتكون من 96% معادن، لا تحتوي على خلايا حية.</div>
+                </div>
+                <div class="interactive-area">
+                    <div class="part-name"><span class="tooltip-icon">🦷</span> العاج (Dentin)</div>
+                    <div class="part-desc">الطبقة الوسطى الصفراء، أقل صلابة من المينا، تحتوي على أنابيب دقيقة تنقل الإحساس بالحرارة والبرودة والألم.</div>
+                </div>
+                <div class="interactive-area">
+                    <div class="part-name"><span class="tooltip-icon">🦷</span> لب السن (العصب)</div>
+                    <div class="part-desc">النسيج الحي داخل السن، يحتوي على أوعية دموية وأعصاب. إذا وصل التسوس إليه، يحدث ألم شديد وقد يحتاج لسحب عصب.</div>
+                </div>
+                <div class="interactive-area">
+                    <div class="part-name"><span class="tooltip-icon">🦷</span> الجذر وقناة الجذر</div>
+                    <div class="part-desc">الجذر يثبت السن في عظم الفك، وقناة الجذر هي الممر الذي يمر منه العصب والأوعية الدموية. بعض الأضراس لها 3-4 جذور.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- البطاقة 2: تشريح اللثة (الصورة 6.jpg) -->
+        <div class="card">
+            <img src="images/6.jpg" alt="تشريح اللثة" class="card-img" loading="lazy" onerror="this.src='https://placehold.co/1024x576?text=Gum+Anatomy+6.jpg'">
+            <div class="card-content">
+                <h3>🩸 تشريح اللثة (صحية وملتهبة)</h3>
+                <div class="interactive-area">
+                    <div class="part-name"><span class="tooltip-icon">✅</span> اللثة الصحية</div>
+                    <div class="part-desc">لونها وردي فاتح، متماسكة، لا تنزف عند التنظيف، تلتصق بالسن بإحكام وتشكل حاجزاً ضد البكتيريا.</div>
+                </div>
+                <div class="interactive-area">
+                    <div class="part-name"><span class="tooltip-icon">⚠️</span> اللثة الملتهبة (Gingivitis)</div>
+                    <div class="part-desc">حمراء، منتفخة، تنزف بسهولة عند التفريش. سببها تراكم البلاك. قابلة للعلاج بالتنظيف الجيد.</div>
+                </div>
+                <div class="interactive-area">
+                    <div class="part-name"><span class="tooltip-icon">🔄</span> الحليمة اللثوية</div>
+                    <div class="part-desc">المثلث الوردي بين الأسنان. إذا فقدت بسبب الالتهاب المزمن، تبقى فراغات سوداء مزعجة جمالياً.</div>
+                </div>
+                <div class="interactive-area">
+                    <div class="part-name"><span class="tooltip-icon">🛡️</span> الألياف اللثوية</div>
+                    <div class="part-desc">أربطة قوية تربط السن بالعظم، تعمل كممتص صدمات أثناء المضغ.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- البطاقة 3: عظم الفك (الصورة 7.jpg) -->
+        <div class="card">
+            <img src="images/7.jpg" alt="عظم الفك" class="card-img" loading="lazy" onerror="this.src='https://placehold.co/1024x576?text=Jaw+Bone+7.jpg'">
+            <div class="card-content">
+                <h3>🦴 عظم الفك (العلوي والسفلي)</h3>
+                <div class="interactive-area">
+                    <div class="part-name"><span class="tooltip-icon">🏗️</span> العظم السنخي (Alveolar bone)</div>
+                    <div class="part-desc">الجزء من عظم الفك الذي يحتضن جذور الأسنان. يحافظ على الأسنان في مكانها.</div>
+                </div>
+                <div class="interactive-area">
+                    <div class="part-name"><span class="tooltip-icon">⚠️</span> ضمور العظم بعد الخلع</div>
+                    <div class="part-desc">عند خلع سن دون زراعة، يضمر العظم السنخي ويختفي بنسبة تصل إلى 50% خلال 6 أشهر، مما يغير ملامح الوجه.</div>
+                </div>
+                <div class="interactive-area">
+                    <div class="part-name"><span class="tooltip-icon">🔄</span> العظم القاعدي (Basal bone)</div>
+                    <div class="part-desc">الجزء الأساسي من الفك الذي لا يتأثر كثيراً بخلع الأسنان، ويعطي الشكل العام للفك.</div>
+                </div>
+                <div class="interactive-area">
+                    <div class="part-name"><span class="tooltip-icon">🦷</span> قناة العصب الفكي السفلي</div>
+                    <div class="part-desc">قناة داخل عظم الفك السفلي تحتوي على العصب والأوعية. يجب الحذر أثناء زراعة الأسنان لتجنب إصابتها.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- البطاقة 4: الأسنان اللبنية والدائمة (الصورة 8.jpg) -->
+        <div class="card">
+            <img src="images/8.jpg" alt="أسنان لبنية ودائمة" class="card-img" loading="lazy" onerror="this.src='https://placehold.co/1024x576?text=Deciduous+Permanent+8.jpg'">
+            <div class="card-content">
+                <h3>🍼 الأسنان اللبنية والدائمة</h3>
+                <div class="interactive-area">
+                    <div class="part-name"><span class="tooltip-icon">👶</span> الأسنان اللبنية (20 سناً)</div>
+                    <div class="part-desc">تظهر من عمر 6 أشهر إلى سنتين، تسقط تدريجياً بين 6-12 سنة. تعمل كحافظات مسافة للأسنان الدائمة.</div>
+                </div>
+                <div class="interactive-area">
+                    <div class="part-name"><span class="tooltip-icon">🧑</span> الأسنان الدائمة (32 سناً)</div>
+                    <div class="part-desc">تبدأ بالظهور من عمر 6 سنوات، تشمل القواطع والأنياب والضواحك والأضراس، وأخيراً أضراس العقل (17-25 سنة).</div>
+                </div>
+                <div class="interactive-area">
+                    <div class="part-name"><span class="tooltip-icon">🦷</span> ضرس العقل (طاحونة العقل)</div>
+                    <div class="part-desc">آخر ضرس يظهر، غالباً يحتاج خلعاً إذا كان منطمراً أو مسبباً ازدحاماً أو التهابات متكررة.</div>
+                </div>
+                <div class="interactive-area">
+                    <div class="part-name"><span class="tooltip-icon">📏</span> ترقيم الأسنان العالمي</div>
+                    <div class="part-desc">نظام ترقيم الأسنان (1-32) يبدأ من الضرس العلوي الأيمن وينتهي بالضرس السفلي الأيمن، لتسهيل التواصل بين الأطباء.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p> العيادة السنية الحديثة - د. محمد الأحمد | تشريح تفاعلي للأسنان والفم</p>
+    </div>
+</div>
+
+<!-- Font Awesome للآيقونات -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<script>
+    // إضافة تأثير بسيط لتحسين اللمس: عند الضغط على منطقة تفاعلية، تظل مظللة للحظة
+    const interactiveAreas = document.querySelectorAll('.interactive-area');
+    interactiveAreas.forEach(area => {
+        area.addEventListener('touchstart', function() {
+            this.style.backgroundColor = '#fff3e0';
+            setTimeout(() => {
+                this.style.backgroundColor = '';
+            }, 200);
+        });
+    });
+    console.log("صفحة الخرائط التشريحية متوافقة مع الهواتف والأجهزة اللوحية");
+</script>
+</body>
+</html>

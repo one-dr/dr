@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أرقام وإحصائيات مذهلة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{background:#1e2a3a;font-family:'Tajawal';padding:20px;color:#eef;}
+        .container{max-width:1100px;margin:auto;}
+        h1{text-align:center;font-size:2rem;margin-bottom:5px;}
+        .sub{text-align:center;color:#aaa;margin-bottom:30px;}
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;}
+        .stat-card{background:#2a3a4a;border-radius:28px;padding:18px;text-align:center;border-bottom:4px solid #ffaa44;}
+        .stat-number{font-size:2.2rem;font-weight:800;color:#ffaa44;margin-bottom:8px;}
+        .stat-text{font-size:0.9rem;}
+        footer{text-align:center;margin-top:40px;color:#88a;font-size:0.8rem;}
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>📊 أرقام وإحصائيات مذهلة</h1>
+    <div class="sub">37 رقماً لا تصدق عن أسنانك</div>
+    <div class="grid" id="statsGrid"></div>
+    <footer>المصدر: منظمة الصحة العالمية ودراسات طب الأسنان</footer>
+</div>
+<script>
+    const stats = [
+        "38 يوماً: متوسط الوقت الذي يقضيه الشخص في تنظيف أسنانه طوال حياته.",
+        "75% من أطفال العالم يعانون من تسوس الأسنان.",
+        "30 دقيقة يومياً: متوسط مدة مضغ الطعام.",
+        "20 سناً لبنياً و32 سناً دائماً للإنسان.",
+        "الضرس الواحد قد يحتوي على 4 جذور وأحياناً أكثر.",
+        "تنظيف الأسنان مرتين يومياً يقلل خطر فقدانها بنسبة 60%.",
+        "استبدال المشروبات الغازية بالماء يمنع تسوس 3-5 أسنان سنوياً.",
+        "زراعة الأسنان ناجحة بنسبة 98%.",
+        "التدخين هو السبب الأول لفقدان الأسنان لدى البالغين.",
+        "60% من الناس لا يعرفون أن أمراض اللثة قد لا تسبب ألماً في بدايتها.",
+        "الإنسان ينتج 25 ألف لتر لعاب في العمر.",
+        "فم الإنسان يحتوي على بكتيريا أكثر من عدد سكان الأرض.",
+        "700 نوع بكتيري في الفم.",
+        "38.5 يوم: عمر الإنسان في التفريش.",
+        "قوة عض الإنسان تصل 70 كجم على الأضراس.",
+        "200 باوند: قوة المضغ على الأضراس الخلفية.",
+        "1-2 لتر لعاب يفرز يومياً.",
+        "2500 شعيرة في فرشاة الأسنان المتوسطة.",
+        "تسوس الأسنان ثاني أكثر الأمراض شيوعاً بعد نزلات البرد.",
+        "51% من الناس لا يستخدمون خيط الأسنان يومياً.",
+        "15% من الناس يعانون من رهاب الأسنان.",
+        "90% من أمراض الفم يمكن الوقاية منها.",
+        "3.5 مليار شخص يعانون من أمراض الفم عالمياً.",
+        "30% من كبار السن فقدوا كل أسنانهم في بعض الدول.",
+        "70% من الأطفال دون 6 سنوات لديهم تسوس في الأسنان اللبنية.",
+        "60% من المراهقين لديهم علامات التهاب اللثة.",
+        "كل 1 جرام من السكر يزيد البكتيريا 1000 مرة.",
+        "40% من الناس لا يزورون طبيب الأسنان سنوياً.",
+        "25% من البالغين يفقدون سناً واحداً على الأقل بعد سن 50.",
+        "10% من الناس يفرشون أسنانهم لأقل من دقيقة.",
+        "50% من الناس لا يعرفون الطريقة الصحيحة للتفريش.",
+        "80% من رائحة الفم الكريهة مصدرها اللسان.",
+        "30% من الناس يعانون من حساسية الأسنان.",
+        "90% من التيجان السنية تدوم لأكثر من 10 سنوات.",
+        "95% من زراعة الأسنان تدوم لأكثر من 20 سنة.",
+        "60% من الناس يشعرون بتحسن في ثقتهم بعد تبييض الأسنان.",
+        "70% من الناس يلاحظون ابتسامة الآخرين أولاً."
+    ];
+    const grid = document.getElementById('statsGrid');
+    stats.forEach((stat,i)=>{
+        const card = document.createElement('div');
+        card.className = 'stat-card';
+        const parts = stat.split(':');
+        const numberPart = parts[0];
+        const textPart = parts.slice(1).join(':');
+        card.innerHTML = `<div class="stat-number">${numberPart.trim()}</div><div class="stat-text">${textPart.trim()}</div>`;
+        grid.appendChild(card);
+    });
+</script>
+</body>
+</html>

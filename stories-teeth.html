@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قصص الأسنان عبر الزمن - العيادة السنية الحديثة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{background:#1e1e2a;font-family:'Tajawal';padding:20px;color:#f0f0f0;}
+        .container{max-width:1200px;margin:auto;}
+        h1{text-align:center;font-size:2rem;color:#f4c542;margin-bottom:10px;}
+        .sub{text-align:center;color:#bbaa88;margin-bottom:30px;}
+        .era{background:#2a2a3a;border-radius:32px;margin-bottom:40px;padding:5px 0 20px;}
+        .era-title{background:#f4c542;color:#1e1e2a;display:inline-block;padding:8px 25px;border-radius:40px;margin:15px 20px;font-weight:800;}
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;padding:0 20px;}
+        .card{background:#2e2e42;border-radius:28px;padding:20px;transition:0.2s;border-left:5px solid #f4c542;}
+        .card:hover{transform:translateY(-5px);background:#3a3a50;}
+        .story-title{font-weight:800;font-size:1.2rem;color:#f4c542;margin-bottom:12px;}
+        .story-text{font-size:0.9rem;line-height:1.5;color:#ddd;}
+        footer{text-align:center;margin-top:40px;color:#888;font-size:0.75rem;}
+        @media (max-width:600px){.grid{grid-template-columns:1fr;}}
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>📖 قصص الأسنان عبر الزمن</h1>
+    <div class="sub">10 قصص من الماضي · 10 من الحاضر · 10 من المستقبل</div>
+
+    <div class="era">
+        <div class="era-title">🏺 الماضي (جذور طب الأسنان)</div>
+        <div class="grid" id="pastGrid"></div>
+    </div>
+
+    <div class="era">
+        <div class="era-title">📱 الحاضر (عصر التكنولوجيا)</div>
+        <div class="grid" id="presentGrid"></div>
+    </div>
+
+    <div class="era">
+        <div class="era-title">🚀 المستقبل (خيال يقترب)</div>
+        <div class="grid" id="futureGrid"></div>
+    </div>
+
+    <footer>قصص حقيقية وملهمة من وحي طب الأسنان | العيادة السنية الحديثة</footer>
+</div>
+<script>
+    const pastStories = [
+        "خشب واشنطن: الرئيس الأمريكي جورج واشنطن لم يمتلك أسناناً خشبية كما يُشاع، بل طقماً من عاج الفيلة وأسنان بشرية حقيقية!",
+        "ألماس المايا: الملوك المايا كانوا يثقبون أسنانهم السليمة يدوياً لزرع أحجار اليشم الكريمة كدليل على الثراء.",
+        "ديدان الأسنان: في العصور الوسطى، كان الناس يعتقدون أن ألم الأسنان سببه 'دودة' تحفر داخل السن، وكانوا يدخنون الأعشاب لطردها.",
+        "الأسنان السوداء: في اليابان القديمة، كانت النساء المتزوجات يصبغن أسنانهن باللون الأسود (الأوهاجورو) كرمز للجمال والولاء.",
+        "بول الرومان: الرومان الأثرياء كانوا يستوردون البول من البرتغال للمضمضة به، لاحتوائه على الأمونيا المبيضة للأسنان!",
+        "الحلاق والجراح: في القرن الـ18، لم يكن هناك طبيب أسنان، بل كان 'الحلاق' هو من يخلع الأسنان في الساحات العامة.",
+        "أول معجون: الفراعنة اخترعوا أول معجون أسنان من رماد حوافر الثيران وقشر البيض المطحون.",
+        "أسنان واترلو: بعد معركة واترلو، تم خلع أسنان الجنود القتلى لصنع أطقم أسنان للأثرياء في أوروبا!",
+        "فرشاة السجن: أول فرشاة أسنان حديثة اخترعها الإنجليزي ويليام أديس وهو داخل السجن باستخدام عظمة وشعر خنزير.",
+        "أسنان القراصنة: القراصنة كانوا يستبدلون الأسنان المفقودة بقطع من الذهب أو الخشب لتخويف الأعداء."
+    ];
+
+    const presentStories = [
+        "خاتم العقل: شاب أمريكي طلب يد حبيبته بخاتم زفاف وضع فيه 'ضرس العقل' الخاص به بدلاً من الألماس!",
+        "ابتسامة زووم: خلال جائحة كورونا، زادت عمليات تجميل الأسنان بنسبة 40% لأن الناس لاحظوا عيوب أسنانهم في مكالمات Zoom.",
+        "السن المفقود: طفل ابتلع سنه اللبني بالخطأ، فكتب له الطبيب رسالة رسمية لـ 'جنية الأسنان' يؤكد فيها سقوط السن.",
+        "كلب التيتانيوم: كلب بوليسي فقد أنيابه في مهمة، فتمت زراعة أنياب من التيتانيوم له ليعود للخدمة أشرس من قبل.",
+        "القرصان الإلكتروني: هاكر اكتشف ثغرة أمنية في فرشاة أسنان ذكية، مما أدى لاختراق شبكة المنزل بالكامل.",
+        "ولادة بأسنان: طفلة ولدت في بريطانيا بأسنان أمامية كاملة، مما أثار دهشة الأطباء وتم خلعها لتتمكن من الرضاعة.",
+        "خلايا منقذة: أب احتفظ بالأسنان اللبنية لابنته، وبعد سنوات استخدمت الخلايا الجذعية منها لعلاجها من مرض مناعي.",
+        "طباعة ابتسامة: مريض فقد أسنانه في حادث قبل زفافه بيومين، فقام الطبيب بطباعة أسنان ثلاثية الأبعاد له في 5 ساعات فقط.",
+        "موسيقى العصب: طبيب أسنان يركب سماعات تنقل الموسيقى عبر عظام الفك للمريض لتغطية صوت الحفارة.",
+        "تبييض الفحم: فتاة استخدمت الفحم النشط لتبييض أسنانها يومياً، فانتهى بها الأمر بمسح طبقة المينا بالكامل."
+    ];
+
+    const futureStories = [
+        "نانوبوتات التنظيف: أسراب من الروبوتات النانوية تعيش في الفم، تنظف الأسنان تلقائياً أثناء النوم.",
+        "أسنان مضيئة: تعديل جيني يجعل الأسنان تتوهج في الظلام بألوان مختلفة حسب المزاج.",
+        "علكة النمو: علكة تحتوي على بروتينات تحفز اللثة على إنبات أسنان جديدة بدل المخلوعة في 3 أشهر.",
+        "أسنان بذاكرة تخزين: زراعة شريحة تخزين (1 تيرابايت) داخل ضرس العقل الاصطناعي لحفظ البيانات السرية.",
+        "طبيب آلي: روبوت متكامل يجري عمليات الزراعة الدقيقة في 5 دقائق بدون أي تدخل بشري.",
+        "إنذار السكر: حشوات ذكية ترسل إشعاراً لهاتفك عندما ترتفع نسبة السكر في فمك محذرة من التسوس.",
+        "زجاج حيوي: مينا صناعية تعيد بناء نفسها من اللعاب كلما تعرضت للخدش.",
+        "إنترنت الأسنان (IoD): أسنان تتواصل مع ثلاجة المنزل لتمنعك من أكل الحلويات إذا رصدت بداية تسوس.",
+        "بصمة الفك لفتح السيارات: تشغيل السيارة لا يحتاج مفتاحاً، بل عضة خفيفة على مستشعر خاص.",
+        "نهاية التسوس: إعلان يوم عالمي في عام 2060 كآخر يوم يسجل فيه العالم إصابة بتسوس الأسنان."
+    ];
+
+    function renderStories(containerId, storiesArray) {
+        const container = document.getElementById(containerId);
+        storiesArray.forEach((story, idx) => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `<div class="story-title">📖 قصة ${idx+1}</div><div class="story-text">${story}</div>`;
+            container.appendChild(card);
+        });
+    }
+
+    renderStories('pastGrid', pastStories);
+    renderStories('presentGrid', presentStories);
+    renderStories('futureGrid', futureStories);
+</script>
+</body>
+</html>

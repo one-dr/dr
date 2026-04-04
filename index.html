@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>العيادة السنية الحديثة | د. محمد الأحمد</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ================= ثيم العيادة ================= */
+        :root {
+            --primary: #0077B6; 
+            --primary-light: #00A896; 
+            --bg-light: #F8F9FA; 
+            --text-dark: #212529; 
+            --text-muted: #6C757D; 
+            --alert-color: #E63946; 
+            --gold: #FFD700; 
+            --card-bg: #ffffff;
+            --border-color: #e9ecef;
+            --font-main: 'Tajawal', sans-serif;
+        }
+
+        body.dark-mode {
+            --primary: #48CAE4; --primary-light: #2A9D8F; --bg-light: #121212;
+            --text-dark: #F8F9FA; --text-muted: #ADB5BD; --card-bg: #1E1E1E; --border-color: #343A40;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { background-color: var(--bg-light); color: var(--text-dark); font-family: var(--font-main); overflow-x: hidden; line-height: 1.8; transition: 0.3s; }
+
+        /* ================= 1. شاشة التحميل (6 ثواني) ================= */
+        #loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(135deg, #0077B6, #023E8A); color: white; transition: opacity 0.5s ease; text-align: center; padding: 2rem; }
+        .loader-logo i { font-size: 5rem; color: var(--gold); margin-bottom: 20px; animation: breathe 1.5s infinite; }
+        .exp-badge { background: white; color: var(--primary); padding: 5px 20px; border-radius: 30px; font-weight: bold; font-size: 1.1rem; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .loader-title { font-size: 2.5rem; font-weight: 900; margin-bottom: 5px; }
+        .quote-box { font-style: italic; font-size: 1.2rem; margin-top: 30px; color: rgba(255,255,255,0.8); max-width: 90%; }
+        @keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(0.95); opacity: 0.8; } }
+
+        /* الأذكار العائمة */
+        #dhikr-popup { position: fixed; top: 90px; left: 50%; transform: translateX(-50%); background: rgba(0, 168, 150, 0.95); color: white; padding: 8px 25px; border-radius: 30px; font-weight: bold; font-size: 1.1rem; z-index: 9000; box-shadow: 0 4px 15px rgba(0,0,0,0.2); opacity: 0; visibility: hidden; transition: 0.5s; }
+        #dhikr-popup.show { opacity: 1; visibility: visible; top: 110px; }
+
+        /* ================= 2. غلاف المجلة والأزرار العلوية ================= */
+        .hero { position: relative; height: 35vh; background: #000; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0.8; transition: background-image 1s ease-in-out; z-index: 0; }
+        
+        /* الأزرار العلوية (مرتبة عمودياً وظاهرة دائماً) */
+        .top-bar { position: absolute; top: 15px; left: 15px; z-index: 10; display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+        .top-btn { background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.3); color: white; width: 42px; height: 42px; border-radius: 50%; font-size: 1.2rem; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: 0.3s; }
+        .top-btn:active { transform: scale(0.9); }
+
+        /* ================= صندوق العنوان (تحت الصورة) ================= */
+        .title-section {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 15px;
+            margin: -30px 15px 20px 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 5;
+        }
+        .title-section h1 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), #023E8A);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -webkit-text-stroke: 1.5px #000000; 
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.2);
+        }
+        .title-section h2 { font-size: 1.2rem; color: var(--gold); font-weight: 800; margin-bottom: 10px; }
+        .title-section .slogan { font-size: 1rem; color: white; background: var(--primary); padding: 5px 15px; border-radius: 20px; display: inline-block; font-weight: bold; }
+
+        /* ================= 3. الرعاية الإكلينيكية ================= */
+        .section-container { padding: 1.5rem 1.2rem; }
+        .section-title { font-size: 1.8rem; color: var(--primary); margin-bottom: 1.5rem; font-weight: 800; display: flex; align-items: center; gap: 10px; }
+        .section-title::before { content: ''; width: 6px; height: 25px; background: var(--primary-light); border-radius: 5px; }
+
+        .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .service-card { background: var(--card-bg); border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.04); border: 1px solid var(--border-color); cursor: pointer; transition: 0.3s; }
+        .service-card img { width: 100%; height: 120px; object-fit: cover; transition: 0.5s; }
+        .service-card:active img { transform: scale(1.05); }
+        .service-card h3 { padding: 12px 5px; font-size: 0.95rem; color: var(--text-dark); text-align: center; font-weight: 700; }
+        
+        .service-card.featured { grid-column: span 2; border: 2px solid var(--primary); }
+        .service-card.featured img { height: 180px; }
+        .service-card.featured h3 { font-size: 1.4rem; background: var(--primary); color: white; margin: 0; padding: 15px; }
+
+        /* ================= 4. فهرس الموسوعة ================= */
+        .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .toc-card { position: relative; height: 130px; border-radius: 15px; overflow: hidden; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border: 1px solid var(--border-color); }
+        .toc-card-bg { position: absolute; top:0; left:0; width: 100%; height: 100%; object-fit: cover; z-index: 0; filter: brightness(0.5); transition: 0.4s; }
+        .toc-card:active .toc-card-bg { filter: brightness(0.3); transform: scale(1.05); }
+        .toc-card h4 { position: relative; z-index: 1; color: white; font-size: 1.1rem; font-weight: 900; text-align: center; padding: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.9); line-height: 1.4;}
+        .toc-card.full-width { grid-column: span 2; height: 110px;}
+        
+        /* زر الحجز الجديد */
+        .book-btn-card { grid-column: span 2; background: linear-gradient(135deg, var(--gold), #FFA000); height: 70px; border-radius: 15px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4); border:none; margin-top: 10px;}
+        .book-btn-card h4 { color: #000; font-size: 1.3rem; font-weight: 900; display: flex; align-items: center; gap: 10px; margin: 0; }
+
+        /* ================= 5. التذييل المصغر (النصف) ================= */
+        footer { padding: 2rem 1.5rem 1.5rem; border-top: 5px solid var(--primary); background: linear-gradient(135deg, #212529, #023E8A); color: white; }
+        
+        .footer-half-container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; margin-bottom: 20px;}
+        
+        .footer-about, .footer-map { width: 48%; text-align: right;}
+        .footer-about h3 { color: var(--primary-light); font-size: 1.1rem; margin-bottom: 10px; font-weight: 900; }
+        .footer-about h2 { color: var(--gold); font-size: 1.2rem; margin-bottom: 5px; }
+        .footer-about p { color: white; font-weight: bold; margin-bottom: 10px; font-size: 0.85rem;}
+        .footer-about ul { list-style: none; padding: 0; }
+        .footer-about ul li { font-size: 0.75rem; color: #ced4da; margin-bottom: 8px; }
+        
+        .footer-map h3 { color: var(--primary-light); font-size: 1.1rem; margin-bottom: 10px; font-weight: 900; }
+        .map-wrapper { height: 160px; border-radius: 10px; overflow: hidden; border: 2px solid #495057; position: relative;}
+        .map-wrapper iframe { width: 100%; height: 100%; border: none; }
+        .glowing-dot { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 12px; height: 12px; background: var(--alert-color); border-radius: 50%; box-shadow: 0 0 0 rgba(230, 57, 70, 0.7); animation: pulse-dot 1.5s infinite; }
+
+        /* تقييمات المرضى */
+        .reviews-section { margin-bottom: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;}
+        .reviews-section h3 { color: var(--gold); margin-bottom: 15px; text-align: center; font-size: 1.2rem;}
+        .reviews-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .review-card { background: rgba(255,255,255,0.1); padding: 12px; border-radius: 10px; text-align: right; border: 1px solid rgba(255,255,255,0.05);}
+        .stars { color: var(--gold); font-size: 0.85rem; margin-bottom: 5px; }
+        .reviewer-name { font-weight: 800; color: white; margin-bottom: 3px; font-size: 0.9rem;}
+        .review-card p { color: #dee2e6; font-size: 0.8rem; line-height: 1.4; margin:0;}
+        
+        .add-rev-toggle { display: block; width: 100%; max-width: 250px; margin: 15px auto 0; background: transparent; border: 2px solid var(--primary-light); color: white; padding: 8px; border-radius: 20px; font-weight: bold; cursor: pointer; }
+        .add-review-form { display: none; background: rgba(0,0,0,0.4); padding: 15px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); margin-top: 15px; text-align: right; }
+        .add-review-form input, .add-review-form select, .add-review-form textarea { width: 100%; padding: 10px; margin-bottom: 10px; border: none; border-radius: 5px; font-family: var(--font-main); }
+        .add-review-form textarea { height: 60px; resize: none; }
+        .add-review-form button { width: 100%; background: var(--primary-light); color: white; border: none; padding: 10px; border-radius: 5px; font-weight: bold; cursor: pointer; }
+
+        .footer-bottom { width: 60%; margin: 20px auto 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; }
+        .footer-logo { font-size: 1.2rem; color: var(--primary-light); font-weight: 900; margin-bottom: 5px; }
+        .footer-bottom p { font-size: 0.75rem; color: #ced4da; line-height: 1.6; margin-bottom: 10px;}
+        .footer-bottom .time { color: white; font-weight: bold; font-size: 0.8rem;}
+
+        /* ================= 6. الصفحات المنزلقة و الإطارات ================= */
+        .app-page { position: fixed; top: 0; left: -100%; width: 100%; height: 100%; background: var(--bg-light); z-index: 1000; transition: left 0.3s; overflow-y: auto; overflow-x: hidden; }
+        .app-page.active { left: 0; }
+        
+        .article-header { position: sticky; top: 0; background: var(--card-bg); padding: 15px; display: flex; align-items: center; z-index: 10; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border-bottom: 2px solid var(--primary); }
+        .back-btn { background: var(--bg-light); border: none; color: var(--primary); width: 40px; height: 40px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; }
+        .article-header span { flex: 1; text-align: center; font-size: 1.2rem; font-weight: 800; color: var(--text-dark); }
+
+        .article-hero { width: 100%; height: 25vh; object-fit: cover; }
+        .article-content { padding: 2rem 1.2rem; background: var(--card-bg); min-height: 100vh; border-top-left-radius: 25px; border-top-right-radius: 25px; margin-top: -20px; position: relative; box-shadow: 0 -5px 15px rgba(0,0,0,0.05);}
+        .article-content h1 { font-size: 2rem; color: var(--primary); margin-bottom: 1rem; font-weight: 900;}
+        
+        .sub-menu-grid { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+        .sub-menu-btn { background: var(--card-bg); border: 1px solid var(--border-color); padding: 1.2rem; display: flex; justify-content: space-between; align-items: center; font-weight: 700; color: var(--primary); border-radius: 10px; cursor: pointer; }
+        .full-iframe { width: 100%; height: 85vh; border: none; border-radius: 10px; background: var(--card-bg);}
+
+        /* الطب النبوي والمرجع الدوائي */
+        .prophetic-box { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 15px; margin-bottom: 20px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+        .prophetic-box img { width: 100%; height: 180px; object-fit: cover; }
+        .prophetic-content { padding: 15px; }
+        .prophetic-title { color: var(--primary-light); font-weight: 900; font-size: 1.2rem; margin-bottom: 10px; border-bottom: 2px dashed var(--border-color); padding-bottom: 5px;}
+        .hadith-text { color: var(--primary); font-weight: 700; font-style: italic; background: var(--bg-light); padding: 10px; border-radius: 8px; margin-bottom: 10px;}
+
+        .drug-card { display: flex; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 15px; overflow: hidden; align-items: stretch; }
+        .drug-card img { width: 100px; object-fit: cover; background: #fff; padding: 5px; border-left: 1px solid var(--border-color);}
+        .drug-info { padding: 10px; flex: 1; display: flex; flex-direction: column; justify-content: center;}
+        .drug-info h4 { color: var(--primary); font-size: 1.1rem; margin-bottom: 5px; font-weight: 800;}
+        .drug-info .comp { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 5px; background: var(--bg-light); padding: 5px; border-radius: 5px;}
+        .drug-info .benefit { font-size: 0.9rem; color: var(--text-dark); font-weight: 500; line-height: 1.4;}
+
+        /* نموذج الحجز (يعمل بكفاءة) */
+        .booking-form-wrap { background: var(--card-bg); padding: 20px; border-radius: 15px; border: 2px solid var(--primary); width: 90%; max-width: 400px; margin: 15vh auto; }
+        .booking-form-wrap input, .booking-form-wrap select { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid var(--border-color); border-radius: 8px; font-family: var(--font-main); background: var(--bg-light); color: var(--text-dark);}
+        .booking-form-wrap button { width: 100%; background: var(--primary); color: white; border: none; padding: 15px; border-radius: 8px; font-size: 1.2rem; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap:10px;}
+
+        .fab-whatsapp { position: fixed; bottom: 20px; left: 20px; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 2rem; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3); z-index: 999; text-decoration: none;}
+    </style>
+</head>
+<body>
+
+    <div id="dhikr-popup">سبحان الله</div>
+
+    <div id="loader">
+        <div class="loader-logo"><i class="fa-solid fa-tooth"></i></div>
+        <div class="exp-badge">خبرة 15 عاماً من الإتقان</div>
+        <div class="loader-title">العيادة السنية الحديثة</div>
+        <p style="letter-spacing: 1px; font-weight: 500;">د. محمد محمود الأحمد</p>
+        <div class="quote-box" id="loadingQuote">نستحضر العلم.. لنصنع الابتسامة.</div>
+    </div>
+
+    <header class="hero">
+        <div class="top-bar">
+            <div class="top-btn" onclick="toggleDarkMode()"><i class="fa-solid fa-moon" id="darkModeIcon"></i></div>
+            <div class="top-btn" id="installAppBtn"><i class="fa-solid fa-download"></i></div>
+            <div class="top-btn" onclick="sharePage()"><i class="fa-solid fa-share-nodes"></i></div>
+        </div>
+        <div class="hero-bg" id="heroSlider"></div>
+    </header>
+
+    <div class="title-section">
+        <h1>العيادة السنية الحديثة</h1>
+        <h2>بإشراف: د. محمد محمود الأحمد</h2>
+        <p class="slogan">"نصنع الابتسامة.. لنغير الحياة"</p>
+    </div>
+
+    <section class="section-container" style="background: linear-gradient(to bottom, var(--bg-light), rgba(0,168,150,0.05)); margin-top: -15px;">
+        <h2 class="section-title">الرعاية الإكلينيكية</h2>
+        <div class="services-grid">
+            <div class="service-card featured" onclick="openService('طب الفم وجراحتها', 'images/surgery_service.jpg')">
+                <img src="images/surgery_service.jpg" onerror="this.src='https://via.placeholder.com/800?text=طب+الفم'">
+                <h3>طب الفم وجراحتها</h3>
+            </div>
+            <div class="service-card" onclick="openService('معالجة لثوية', 'images/gums_service.jpg')">
+                <img src="images/gums_service.jpg" onerror="this.src='https://via.placeholder.com/600?text=اللثة'">
+                <h3>معالجة لثوية</h3>
+            </div>
+            <div class="service-card" onclick="openService('حشوات ضوئية', 'images/composite_service.jpg')">
+                <img src="images/composite_service.jpg" onerror="this.src='https://via.placeholder.com/600?text=حشوات'">
+                <h3>حشوات ضوئية</h3>
+            </div>
+            <div class="service-card" onclick="openService('جسور تجميلية', 'images/bridge_service.jpg')">
+                <img src="images/bridge_service.jpg" onerror="this.src='https://via.placeholder.com/600?text=جسور'">
+                <h3>جسور تجميلية</h3>
+            </div>
+            <div class="service-card" onclick="openService('تعويضات ثابتة ومتحركة', 'images/dentures_service.jpg')">
+                <img src="images/dentures_service.jpg" onerror="this.src='https://via.placeholder.com/600?text=تعويضات'">
+                <h3>تعويضات سنية</h3>
+            </div>
+            <div class="service-card" onclick="openService('فينير Veneers', 'images/veneers_service.jpg')">
+                <img src="images/veneers_service.jpg" onerror="this.src='https://via.placeholder.com/600?text=فينير'">
+                <h3>فينير Veneers</h3>
+            </div>
+            <div class="service-card" onclick="openService('زيركون Zirconia', 'images/zirconia_service.jpg')">
+                <img src="images/zirconia_service.jpg" onerror="this.src='https://via.placeholder.com/600?text=زيركون'">
+                <h3>زيركون Zirconia</h3>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-container" style="background: linear-gradient(to bottom, rgba(0,119,182,0.05), var(--bg-light)); border-top: 1px solid var(--border-color);">
+        <h2 class="section-title">الموسوعة الشاملة</h2>
+        <div class="toc-grid">
+            
+            <div class="toc-card" onclick="openSubMenu('معرض حقائق مذهلة', menus.amazingFacts)">
+                <img src="images/amazing_tooth_facts.jpg" class="toc-card-bg" onerror="this.src='https://via.placeholder.com/500?text=حقائق'">
+                <h4>معرض حقائق مذهلة</h4>
+            </div>
+
+            <div class="toc-card" onclick="openSubMenu('المعلومات الطبية والتقنيات', menus.medicalTech)">
+                <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?w=500" class="toc-card-bg">
+                <h4>المعلومات الطبية والتقنيات</h4>
+            </div>
+
+            <div class="toc-card" onclick="openSubMenu('عجائب وقصص الأسنان', menus.dentalStories)">
+                <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=500" class="toc-card-bg">
+                <h4>عجائب وقصص الأسنان</h4>
+            </div>
+
+            <div class="toc-card" onclick="openDrugSection()">
+                <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=500" class="toc-card-bg">
+                <h4>المرجع الدوائي</h4>
+            </div>
+
+            <div class="toc-card" onclick="openIframePage('إجراءات الطوارئ الإسعافية', 'emergency.html')">
+                <img src="https://images.unsplash.com/photo-1513628253939-010e64ac66cd?w=500" class="toc-card-bg">
+                <h4 style="color:var(--alert-color);">إجراءات الطوارئ الإسعافية</h4>
+            </div>
+
+            <div class="toc-card" onclick="openIframePage('خرائط تشريحية للأسنان', 'anatomy.html')">
+                <img src="https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=500" class="toc-card-bg">
+                <h4>خرائط تشريحية للأسنان</h4>
+            </div>
+
+            <div class="toc-card" onclick="openPropheticMedicine()">
+                <img src="https://images.unsplash.com/photo-1585036156171-384164a8c675?w=500" class="toc-card-bg">
+                <h4>الطب النبوي في صحة الفم</h4>
+            </div>
+
+            <div class="toc-card" onclick="openIframePage('كنوز من الطبيعة', 'natural-remedies.html')">
+                <img src="https://images.unsplash.com/photo-1515823662972-da6a2e4d3002?w=500" class="toc-card-bg">
+                <h4 style="color: #2a9d8f;">كنوز من الطبيعة</h4>
+            </div>
+
+            <div class="toc-card full-width" onclick="openIframePage('ماذا أجاب الدكتور محمد الأحمد؟', 'dr-qa.html')">
+                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800" class="toc-card-bg">
+                <h4>ماذا أجاب الدكتور محمد الأحمد؟</h4>
+            </div>
+
+            <div class="toc-card full-width" onclick="openIframePage('إرشادات د. محمد الأحمد', 'dr-tips.html')">
+                <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=800" class="toc-card-bg">
+                <h4 style="color: var(--gold);">إرشادات د. محمد الأحمد</h4>
+            </div>
+
+            <button class="book-btn-card" onclick="openBooking()">
+                <h4><i class="fa-solid fa-calendar-check"></i> احجز موعدك الآن</h4>
+            </button>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-half-container">
+            <div class="footer-about">
+                <h3>من نحن</h3>
+                <h2>د. محمد محمود الأحمد</h2>
+                <p>أخصائي في طب الفم وجراحتها</p>
+                <ul>
+                    <li><i class="fa-solid fa-graduation-cap"></i> بكالوريوس ثانوية عامة (2007-2008)</li>
+                    <li><i class="fa-solid fa-university"></i> خريج الجامعة السورية الخاصة (2013)</li>
+                    <li><i class="fa-solid fa-location-dot"></i> منبج ـ شارع السندس ـ العيادة الحديثة</li>
+                </ul>
+            </div>
+
+            <div class="footer-map">
+                <h3>موقع العيادة</h3>
+                <div class="map-wrapper">
+                    <iframe src="https://maps.google.com/maps?q=Manbij&t=&z=13&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
+                    <div class="glowing-dot"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="reviews-section">
+            <h3>آراء مرضانا</h3>
+            <div class="reviews-grid" id="reviewsContainer">
+                <div class="review-card"><div class="reviewer-name">أحمد المحمد</div><div class="stars">⭐⭐⭐⭐⭐</div><p>دكتور ممتاز ويده خفيفة جداً.</p></div>
+                <div class="review-card"><div class="reviewer-name">فاطمة الحسن</div><div class="stars">⭐⭐⭐⭐⭐</div><p>عيادة نظيفة وتعقيم ممتاز.</p></div>
+                <div class="review-card"><div class="reviewer-name">محمود العبدالله</div><div class="stars">⭐⭐⭐⭐</div><p>طبيب محترم يشرح لك الحالة بالتفصيل.</p></div>
+                <div class="review-card"><div class="reviewer-name">سارة الجاسم</div><div class="stars">⭐⭐⭐⭐⭐</div><p>أفضل عيادة في منبج بصراحة.</p></div>
+                <div class="review-card" style="grid-column: span 2;"><div class="reviewer-name">عمر خليل</div><div class="stars">⭐⭐⭐⭐⭐</div><p>دقة في المواعيد واهتمام كبير بالمريض.</p></div>
+            </div>
+
+            <button class="add-rev-toggle" onclick="document.getElementById('addRevForm').style.display='block'">أضف تعليقك <i class="fa-solid fa-comment-medical"></i></button>
+            
+            <div class="add-review-form" id="addRevForm">
+                <h4 style="color:var(--gold);">تقييم جديد</h4>
+                <input type="text" id="revName" placeholder="الاسم الكريم">
+                <select id="revStars">
+                    <option value="5">⭐⭐⭐⭐⭐ ممتاز</option>
+                    <option value="4">⭐⭐⭐⭐ جيد جداً</option>
+                    <option value="3">⭐⭐⭐ جيد</option>
+                </select>
+                <textarea id="revText" placeholder="رأيك يهمنا..."></textarea>
+                <button onclick="addReview()">نشر التعليق</button>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-logo">العيادة السنية الحديثة</div>
+            <p><strong>بإشراف د. محمد محمود الأحمد</strong><br>نجمع بين صرامة العلم وإبداع الفن لنقدم لك رعاية طبية متكاملة.</p>
+            <div class="time"><i class="fa-solid fa-clock"></i> نستقبل الحالات 24 ساعة (7 أيام في الأسبوع)</div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/00963935301584" class="fab-whatsapp" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+
+    <div class="app-page" id="subMenuPage">
+        <div class="article-header">
+            <button class="back-btn" onclick="closePage('subMenuPage')"><i class="fa-solid fa-arrow-right"></i></button>
+            <span id="subPageTitle">فهرس القسم</span>
+        </div>
+        <div class="article-content" style="border-radius: 0; box-shadow: none; margin-top: 0; min-height: calc(100vh - 70px);">
+            <div class="sub-menu-grid" id="subMenuContainer"></div>
+        </div>
+    </div>
+
+    <div class="app-page" id="articlePage" style="z-index: 1001;">
+        <div class="article-header">
+            <button class="back-btn" onclick="closePage('articlePage')"><i class="fa-solid fa-arrow-right"></i></button>
+            <span id="articleTopTitle">التفاصيل</span>
+        </div>
+        <img src="" id="articleImg" class="article-hero" style="display:none;">
+        <div class="article-content" id="articleContentWrap">
+            <h1 id="articleTitle">العنوان</h1>
+            <div class="article-body" id="articleBody"></div>
+        </div>
+    </div>
+
+    <div class="app-page" id="drugPage" style="z-index: 1002;">
+        <div class="article-header">
+            <button class="back-btn" onclick="closePage('drugPage')"><i class="fa-solid fa-arrow-right"></i></button>
+            <span>المرجع الدوائي السني</span>
+        </div>
+        <div class="article-content" style="border-radius:0; margin-top:0; padding: 1.5rem 1rem;">
+            <div style="background:#fff3cd; color:#856404; padding:15px; border-radius:10px; margin-bottom:20px; font-weight:bold; border:1px solid #ffeeba;">
+                <i class="fa-solid fa-triangle-exclamation"></i> تنبيه: هذه المعلومات للعلم فقط ولا تغني عن استشارة الطبيب.
+            </div>
+            <div id="drugCategories"></div>
+        </div>
+    </div>
+
+    <div class="app-page" id="bookingPage" style="z-index: 1005; background: rgba(0,0,0,0.8); display:none; opacity:0; transition: 0.3s; justify-content:center; align-items:center;">
+        <div class="booking-form-wrap" style="background: var(--card-bg); padding: 20px; border-radius: 15px; width: 90%; max-width: 400px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                <h3 style="color:var(--primary);"><i class="fa-solid fa-calendar-plus"></i> حجز موعد</h3>
+                <i class="fa-solid fa-xmark" style="font-size:1.5rem; cursor:pointer; color:var(--text-muted);" onclick="closeBooking()"></i>
+            </div>
+            <input type="text" id="bookName" placeholder="الاسم الثلاثي" style="width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid var(--border-color);">
+            <input type="text" id="bookRegion" placeholder="المنطقة أو المدينة" style="width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid var(--border-color);">
+            <select id="bookType" style="width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid var(--border-color);">
+                <option value="حجز جديد">حجز جديد</option>
+                <option value="حجز مراجعة">حجز مراجعة</option>
+                <option value="حجز استشارة">حجز استشارة</option>
+            </select>
+            <button onclick="submitBooking()" style="width: 100%; background: var(--primary); color: white; border: none; padding: 15px; border-radius: 8px; font-size: 1.2rem; font-weight: bold; cursor: pointer; display: flex; justify-content: center; gap:10px;"><i class="fa-brands fa-whatsapp"></i> إرسال عبر واتساب</button>
+        </div>
+    </div>
+
+    <script>
+        // 1. شاشة التحميل
+        document.addEventListener("DOMContentLoaded", () => {
+            const quotes = ["الطب المبني على البراهين هو أساس ممارستنا.", "التشخيص الدقيق يمثل 90% من نجاح الخطة.", "ألم العصب معقد، لكن علاجه لدينا يتم بهدوء تام."];
+            const quoteEl = document.getElementById('loadingQuote');
+            if(quoteEl) quoteEl.innerText = quotes[Math.floor(Math.random() * quotes.length)];
+
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                if(loader) { loader.style.opacity = '0'; setTimeout(() => loader.style.display = 'none', 500); }
+            }, 6000); 
+        });
+
+        // 2. سلايدر الهيدر
+        const heroImages = ['images/hero_slide_one.jpg', 'images/hero_slide_two.jpg', 'images/hero_slide_three.jpg', 'images/hero_slide_four.jpg', 'images/hero_slide_five.jpg'];
+        let currImg = 0;
+        const heroBg = document.getElementById('heroSlider');
+        heroBg.style.backgroundImage = `url('https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=1200')`; 
+        setInterval(() => {
+            heroBg.style.backgroundImage = `url('${heroImages[currImg]}'), url('https://images.unsplash.com/photo-1598256989800-fea5ce5146c1?w=1200')`;
+            currImg = (currImg + 1) % heroImages.length;
+        }, 5000);
+
+        // 3. الأذكار العائمة
+        const dhikrList = ["سبحان الله", "الحمدلله", "لا اله الا الله", "الله اكبر", "لا حول ولا قوة الا بالله", "بسم الله", "لا تنسى ذكر الله"];
+        setInterval(() => {
+            const popup = document.getElementById('dhikr-popup');
+            popup.innerText = dhikrList[Math.floor(Math.random() * dhikrList.length)];
+            popup.classList.add('show');
+            setTimeout(() => { popup.classList.remove('show'); }, 3000);
+        }, 20000);
+
+        // 4. أزرار الرأس (Dark Mode, PWA, Share)
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const icon = document.getElementById('darkModeIcon');
+            icon.className = document.body.classList.contains('dark-mode') ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+            icon.style.color = document.body.classList.contains('dark-mode') ? '#FFD700' : 'inherit';
+        }
+        function sharePage() {
+            if (navigator.share) navigator.share({ title: 'العيادة السنية الحديثة', text: 'خبرة 15 عاماً في طب الأسنان.', url: window.location.href });
+        }
+        
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault(); deferredPrompt = e;
+        });
+        document.getElementById('installAppBtn').addEventListener('click', async () => {
+            if (deferredPrompt) { deferredPrompt.prompt(); deferredPrompt = null; } 
+            else { alert("لتثبيت التطبيق، يرجى النقر على خيارات المتصفح (ثلاث نقاط) واختيار 'إضافة إلى الشاشة الرئيسية' (Add to Home Screen)."); }
+        });
+
+        // 5. القوائم המربوطة بصفحات Iframes
+        const menus = {
+            amazingFacts: [
+                { title: "قوة ومتانة الأسنان", file: "facts-strength.html" }, { title: "بصمة الأسنان والغرائب الشخصية", file: "facts-prints.html" },
+                { title: "اللعاب والبكتيريا (المختبر الحيوي)", file: "facts-saliva.html" }, { title: "الأسنان في عالم الحيوان", file: "facts-animals.html" },
+                { title: "تاريخ طب الأسنان", file: "facts-history.html" }, { title: "الوقاية والصحة العامة", file: "facts-prevention.html" },
+                { title: "الابتسامة والجمال", file: "facts-smile.html" }, { title: "أرقام وإحصائيات مذهلة", file: "facts-stats.html" },
+                { title: "معلومات طبية تقنية", file: "facts-tech.html" }, { title: "حقائق سريعة ومدهشة", file: "facts-quick.html" }
+            ],
+            medicalTech: [
+                { title: "زراعة الأسنان وتجديد العظام", file: "med-implants.html" }, { title: "طب الأسنان الرقمي والذكاء الاصطناعي", file: "med-digital.html" },
+                { title: "تجميل الأسنان وابتسامة هوليوود", file: "med-cosmetic.html" }, { title: "تعويضات الأسنان وتكنولوجيا الزيركون", file: "med-zirconia.html" },
+                { title: "طب الأسنان بالليزر", file: "med-laser.html" }, { title: "معالجة اللثة والأنسجة الداعمة", file: "med-gums.html" },
+                { title: "تقويم الأسنان الحديث والشفاف", file: "med-ortho.html" }, { title: "المداواة اللبية وعلاج الجذور الدقيق", file: "med-endodontics.html" },
+                { title: "طب أسنان الأطفال الوقائي", file: "med-pediatric.html" }, { title: "التشخيص الشعاعي والمواد الحيوية الذكية", file: "med-radiology.html" }
+            ],
+            dentalStories: [
+                { title: "قصص الأسنان (ماضي، حاضر، مستقبل)", file: "stories-teeth.html" }, { title: "حقائق وعجائب طبية وبيولوجية", file: "weird-facts.html" }
+            ]
+        };
+
+        function openSubMenu(title, list) {
+            document.getElementById('subPageTitle').innerText = title;
+            const container = document.getElementById('subMenuContainer');
+            container.innerHTML = ''; 
+            list.forEach(item => { container.innerHTML += `<div class="sub-menu-btn" onclick="openIframePage('${item.title}', '${item.file}')"><span>${item.title}</span><i class="fa-solid fa-arrow-left"></i></div>`; });
+            document.getElementById('subMenuPage').classList.add('active');
+        }
+
+        function openIframePage(title, fileSrc) {
+            document.getElementById('articleTopTitle').innerText = "تصفح القسم";
+            document.getElementById('articleTitle').style.display = 'none'; 
+            document.getElementById('articleImg').style.display = 'none'; 
+            document.getElementById('articleContentWrap').style.padding = '0'; 
+            document.getElementById('articleBody').innerHTML = `<iframe src="${fileSrc}" class="full-iframe"></iframe>`;
+            document.getElementById('articlePage').classList.add('active');
+        }
+
+        // 6. الرعاية الإكلينيكية
+        function openService(title, imgUrl) {
+            const txt = {"طب الفم وجراحتها": "جراحة الفم والفكين هي التخصص الدقيق المعني بتشخيص وعلاج الأنسجة. نطبق بروتوكولات جراحية صارمة.", "معالجة لثوية": "نستهدف القضاء على المستعمرات البكتيرية (الجير) التي تتراكم تحت اللثة وتدمر الأساس.", "حشوات ضوئية": "حشوات راتنجية متطورة (كومبوزيت) تطابق تدرجات لون السن وتندمج كيميائياً.", "جسور تجميلية": "تعويض هندسي لسد الفراغ يعتمد على تتويج الأسنان المجاورة.", "تعويضات ثابتة ومتحركة": "إعادة التأهيل لتعويض الفقدان الواسع، لتدعم عضلات الوجه.", "فينير Veneers": "قشور خزفية فائقة الرقة تصنع رقمياً لتعديل اللون والشكل.", "زيركون Zirconia": "مادة بيولوجية توفر صلابة تنافس المعادن مع جمالية عالية."};
+            document.getElementById('articleTopTitle').innerText = "الرعاية الإكلينيكية";
+            document.getElementById('articleTitle').innerText = title; document.getElementById('articleTitle').style.display = 'block';
+            document.getElementById('articleContentWrap').style.padding = '2rem 1.2rem';
+            document.getElementById('articleImg').src = imgUrl; document.getElementById('articleImg').style.display = 'block';
+            document.getElementById('articleBody').innerHTML = `<p style="padding:15px; line-height:2;">${txt[title]}</p>`;
+            document.getElementById('articlePage').classList.add('active');
+        }
+
+        // 7. الطب النبوي المربوط بالصورة الافتراضية
+        function openPropheticMedicine() {
+            document.getElementById('articleTopTitle').innerText = "الطب النبوي";
+            document.getElementById('articleTitle').innerText = "الطب النبوي في صحة الفم"; document.getElementById('articleTitle').style.display = 'block';
+            document.getElementById('articleContentWrap').style.padding = '2rem 1.2rem';
+            document.getElementById('articleImg').src = 'https://images.unsplash.com/photo-1585036156171-384164a8c675?w=500'; document.getElementById('articleImg').style.display = 'block';
+            document.getElementById('articleBody').innerHTML = `
+                <div class="prophetic-box"><img src="images/siwak_sunnah.jpg" onerror="this.src='https://via.placeholder.com/800?text=السواك'"><div class="prophetic-content"><div class="prophetic-title">1. السواك</div><div class="hadith-text">"السواك مطهرة للفم مرضاة للرب"</div></div></div>
+                <div class="prophetic-box"><img src="images/wudu_water.jpg" onerror="this.src='https://via.placeholder.com/800?text=المضمضة'"><div class="prophetic-content"><div class="prophetic-title">2. المضمضة</div><div class="hadith-text">"إذا توضأت فتمضمض"</div></div></div>
+                <div class="prophetic-box"><img src="images/sleep_routine.jpg" onerror="this.src='https://via.placeholder.com/800?text=الليل'"><div class="prophetic-content"><div class="prophetic-title">3. السواك عند النوم</div><div class="hadith-text">"كان رسول الله ﷺ إذا قام من الليل يشوص فاه بالسواك"</div></div></div>
+                <div class="prophetic-box"><img src="images/hijama_therapy.jpg" onerror="this.src='https://via.placeholder.com/800?text=الحجامة'"><div class="prophetic-content"><div class="prophetic-title">4. الحجامة للرأس</div><div class="hadith-text">"الحجامة على الهام"</div></div></div>
+                <div class="prophetic-box"><img src="images/pure_honey.jpg" onerror="this.src='https://via.placeholder.com/800?text=العسل'"><div class="prophetic-content"><div class="prophetic-title">5. العسل</div><div class="hadith-text">"عسل الله شفاء"</div></div></div>
+                <div class="prophetic-box"><img src="images/clean_vessels.jpg" onerror="this.src='https://via.placeholder.com/800?text=الآنية'"><div class="prophetic-content"><div class="prophetic-title">6. النهي عن آنية الذهب</div><div class="hadith-text">"لا تشربوا في آنية الذهب والفضة"</div></div></div>
+            `;
+            document.getElementById('articlePage').classList.add('active');
+        }
+
+        // 8. المرجع الدوائي (الصور أصلحت)
+        function openDrugSection() {
+            const drugsData = [
+                { category: "سكن الألم (NSAIDs)", drugs: [{ img: "images/ibuprofen.jpg", name: "إيبوبروفين", comp: "حمض البروبيونيك", ben: "مسكن قوي لألم ما بعد الخلع." }, { img: "images/paracetamol.jpg", name: "باراسيتامول", comp: "أسيتامينوفين", ben: "آمن للأطفال والحوامل." }, { img: "images/diclofenac.jpg", name: "ديكلوفيناك", comp: "حمض فينيل أسيتيك", ben: "سريع الامتصاص." }, { img: "images/naproxen.jpg", name: "نابروكسين", comp: "مضاد التهاب", ben: "مفعول طويل لآلام مفصل الفك.", fallback: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=200" }, { img: "images/mefenamic.jpg", name: "ميفيناميك أسيد", comp: "بنزويك", ben: "لآلام العظام السنية.", fallback: "https://images.unsplash.com/photo-1550572017-ed20015ade08?w=200" }] },
+                { category: "المضادات الحيوية", drugs: [{ img: "images/amoxicillin.jpg", name: "أموكسيسيلين", comp: "بنسلينيات", ben: "لعدوى البكتيريا البسيطة." }, { img: "images/augmentin.jpg", name: "أوجمنتين", comp: "أموكسيسيلين+كلافولانيك", ben: "للخراريج." }, { img: "images/flagyl.jpg", name: "ميترونيدازول", comp: "إيميدازول", ben: "للبكتيريا اللاهوائية." }, { img: "images/rodogyl.jpg", name: "رودوجيل", comp: "سبيرامايسين+ميترونيدازول", ben: "التهابات اللثة.", fallback: "https://images.unsplash.com/photo-1471864190281-ad5fe9acef70?w=200" }] },
+                { category: "الستيرويدات", drugs: [{ img: "images/dexamethasone.jpg", name: "ديكساميثازون", comp: "كورتيكوستيرويد", ben: "يقلل التورم." }, { img: "images/oracort.jpg", name: "أوراكورت", comp: "تريامسينولون", ben: "للقرح الفموية." }] },
+                { category: "المسكنات المركبة", drugs: [{ img: "images/panadol_extra.jpg", name: "بانادول إكسترا", comp: "باراسيتامول+كافيين", ben: "سرعة التسكين." }, { img: "images/maxigesic.jpg", name: "ماكسيجيسيك", comp: "إيبوبروفين+باراسيتامول", ben: "أقوى تركيبة مسكنة." }] },
+                { category: "المطهرات الموضعية", drugs: [{ img: "images/corsodyl.jpg", name: "كلورهيكسيدين", comp: "مطهر فعال", ben: "غسول فم يمنع البلاك." }, { img: "images/lidocaine.jpg", name: "يدوكايين", comp: "مخدر", ben: "لتقليل ألم الوخز." }] }
+            ];
+            let html = '';
+            drugsData.forEach(cat => {
+                html += `<h3 style="color:var(--primary); margin:20px 0 10px;">${cat.category}</h3>`;
+                cat.drugs.forEach(d => { 
+                    const fallback = d.fallback ? d.fallback : 'https://via.placeholder.com/100?text=دواء';
+                    html += `<div class="drug-card"><img src="${d.img}" onerror="this.src='${fallback}'"><div class="drug-info"><h4>${d.name}</h4><div class="comp">${d.comp}</div><div class="benefit">${d.ben}</div></div></div>`; 
+                });
+            });
+            document.getElementById('drugCategories').innerHTML = html;
+            document.getElementById('drugPage').classList.add('active');
+        }
+
+        // 9. نظام الحجز (إصلاح العرض المنبثق)
+        function openBooking() { 
+            const bp = document.getElementById('bookingPage');
+            bp.style.display = 'flex'; 
+            bp.style.left = '0'; // لضمان دخوله للشاشة
+            setTimeout(()=>{ bp.style.opacity = '1'; }, 10); 
+        }
+        function closeBooking() { 
+            const bp = document.getElementById('bookingPage');
+            bp.style.opacity = '0'; 
+            setTimeout(()=>{ 
+                bp.style.display = 'none'; 
+                bp.style.left = '-100%'; // إعادته للخارج
+            }, 300); 
+        }
+        function submitBooking() {
+            const name = document.getElementById('bookName').value, region = document.getElementById('bookRegion').value, type = document.getElementById('bookType').value;
+            if(!name || !region) return alert("الرجاء إدخال الاسم والمنطقة.");
+            const now = new Date(), dateStr = now.toLocaleDateString('ar-EG'), timeStr = now.toLocaleTimeString('ar-EG');
+            window.open(`https://wa.me/00963935301584?text=${encodeURIComponent(`مرحباً دكتور، أود الحجز:\nالاسم: ${name}\nالمنطقة: ${region}\nالنوع: ${type}\nالوقت: ${dateStr} - ${timeStr}`)}`, '_blank');
+            closeBooking();
+        }
+
+        // 10. التقييمات
+        function addReview() {
+            const name = document.getElementById('revName').value, text = document.getElementById('revText').value, stars = document.getElementById('revStars').value;
+            if (!name || !text) return alert("الرجاء إدخال الاسم والتعليق.");
+            let sHTML = ''; for(let i=0; i<5; i++) sHTML += i < stars ? '⭐' : '☆';
+            document.getElementById('reviewsContainer').insertAdjacentHTML('afterbegin', `<div class="review-card" style="grid-column: span 2;"><div class="reviewer-name">${name}</div><div class="stars">${sHTML}</div><p>${text}</p></div>`);
+            document.getElementById('addRevForm').style.display = 'none'; alert("شكراً لتقييمك!");
+        }
+
+        function closePage(pageId) { document.getElementById(pageId).classList.remove('active'); }
+    </script>
+</body>
+</html>

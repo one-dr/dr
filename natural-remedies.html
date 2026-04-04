@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>كنوز من الطبيعة - 30 عشبة لصحة الأسنان</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(145deg, #e8f5e9 0%, #c8e6c9 100%);
+            color: #1e3a2f;
+            padding: 20px 16px 50px;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        /* الهيدر */
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+        .header h1 {
+            font-size: 2.2rem;
+            background: #2e7d32;
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 60px;
+            color: white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            letter-spacing: 1px;
+        }
+        .header p {
+            margin-top: 15px;
+            font-size: 1rem;
+            color: #2c5e2e;
+            font-weight: 500;
+        }
+
+        /* شبكة البطاقات */
+        .herbs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        /* البطاقة */
+        .herb-card {
+            background: #fffff0;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+            transition: all 0.25s ease;
+            border: 1px solid #c5e0b4;
+        }
+        .herb-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.12);
+            background: #ffffff;
+        }
+
+        .card-header {
+            background: #3c5a3e;
+            padding: 16px 20px;
+            color: white;
+        }
+        .card-header h3 {
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .card-header h3 i {
+            font-size: 1.6rem;
+        }
+
+        .card-body {
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .info-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.85rem;
+            border-bottom: 1px dashed #d4e2c6;
+            padding-bottom: 8px;
+        }
+        .info-row i {
+            width: 28px;
+            color: #5b8c5a;
+            font-size: 1.1rem;
+            margin-top: 2px;
+        }
+        .info-row strong {
+            color: #2d5a2c;
+            min-width: 85px;
+        }
+        .info-text {
+            flex: 1;
+            color: #2c3e2f;
+        }
+        .benefit {
+            background: #e9f5e6;
+            border-radius: 24px;
+            padding: 10px 14px;
+            margin-top: 8px;
+            font-size: 0.85rem;
+            border-right: 4px solid #5b8c5a;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 45px;
+            font-size: 0.75rem;
+            color: #4a6741;
+            border-top: 1px solid #bdd8b0;
+            padding-top: 20px;
+        }
+
+        @media (max-width: 700px) {
+            .herbs-grid {
+                grid-template-columns: 1fr;
+            }
+            .info-row {
+                flex-wrap: wrap;
+            }
+            .info-row strong {
+                min-width: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1><i class="fas fa-leaf"></i> كنوز من الطبيعة <i class="fas fa-tooth"></i></h1>
+        <p>30 عشبة مباركة لصحة فمك وأسنانك – اكتشفها واستفد منها</p>
+    </div>
+
+    <div class="herbs-grid" id="herbsGrid"></div>
+
+    <div class="footer">
+        <i class="fas fa-seedling"></i> الطبيعة خير معين – استشر طبيبك قبل الاستخدام الدائم | العيادة السنية الحديثة
+    </div>
+</div>
+
+<script>
+    const herbs = [
+        { name: "القرنفل", growth: "أغسطس - أكتوبر (الصيف المتأخر)", habitat: "المناطق الاستوائية وشبه الاستوائية، يزرع في الحدائق", use: "مضغ حبة كاملة أو وضع زيت القرنفل المخفف على السن", benefit: "مخدر طبيعي، مسكن قوي لألم الأسنان، مضاد للبكتيريا" },
+        { name: "الميرمية", growth: "مايو - يوليو (الربيع وأوائل الصيف)", habitat: "المناطق الجبلية وحواف الحقول، البحر المتوسط", use: "مضمضة بمغلي الأوراق، أو فرك اللثة بأوراق طازجة", benefit: "تقوي اللثة، توقف النزيف، مضادة للالتهاب" },
+        { name: "النعناع", growth: "يونيو - سبتمبر (الصيف)", habitat: "المناطق الرطبة، على ضفاف الأنهار والوديان", use: "مضغ أوراق طازجة، أو غسول فم بزيت النعناع", benefit: "منعش للفم، يقتل البكتيريا، يخفف رائحة الفم" },
+        { name: "البابونج", growth: "أبريل - يونيو (الربيع)", habitat: "الحقول المفتوحة والأراضي البور، أوروبا وآسيا", use: "غرغرة بشاي البابونج الدافئ", benefit: "مهدئ للثة الملتهبة، يسرع شفاء القرح" },
+        { name: "الكركم", growth: "يناير - مارس (الشتاء المتأخر)", habitat: "المناطق الاستوائية الرطبة، يزرع في آسيا", use: "عجينة من الكركم والماء توضع على اللثة", benefit: "مضاد قوي للالتهاب، مبيض طبيعي للأسنان" },
+        { name: "الزنجبيل", growth: "طوال العام في المناطق الحارة", habitat: "الغابات الاستوائية، يزرع في آسيا وأفريقيا", use: "مضغ قطعة صغيرة أو غسول بمغلي الزنجبيل", benefit: "مضاد للبكتيريا، يقلل انتفاخ اللثة" },
+        { name: "اليانسون", growth: "يونيو - أغسطس (الصيف)", habitat: "المناطق المعتدلة، يزرع في حوض البحر المتوسط", use: "مضغ البذور أو غرغرة بمغلي اليانسون", benefit: "مضاد للميكروبات، يقلل رائحة الفم" },
+        { name: "الشاي الأخضر", growth: "طوال العام في المزارع", habitat: "المناطق الجبلية الرطبة (الصين، الهند، اليابان)", use: "شرب أو غرغرة بالشاي الدافئ بدون سكر", benefit: "مضاد أكسدة قوي، يمنع نمو بكتيريا التسوس" },
+        { name: "الزعتر", growth: "مايو - أغسطس (الربيع والصيف)", habitat: "المناطق الجبلية والصخرية، حوض المتوسط", use: "زيت الزعتر المخفف للغرغرة، أو مغلي الأوراق", benefit: "مطهر قوي، مضاد للفطريات والبكتيريا" },
+        { name: "الحبة السوداء", growth: "مارس - مايو (الربيع)", habitat: "المناطق الجافة وشبه الصحراوية، الهند وباكستان", use: "زيت الحبة السوداء مخفف، أو مضغ البذور", benefit: "مضاد حيوي طبيعي، يقوي المناعة الفموية" },
+        { name: "الصبار (الألوفيرا)", growth: "طوال العام في المناطق الدافئة", habitat: "المناطق الصحراوية وشبه الصحراوية", use: "هلام الصبار يوضع على اللثة كدهان", benefit: "يهدئ الحروق والقرح، يعيد بناء اللثة التالفة" },
+        { name: "العرقسوس", growth: "يونيو - سبتمبر (الصيف)", habitat: "المناطق الرطبة والوديان، جنوب أوروبا وآسيا", use: "مضغ جذور العرقسوس أو غرغرة بالمغلي", benefit: "مضاد للبكتيريا، يقلل التسوس، يخفف التهاب اللثة" },
+        { name: "النيم", growth: "طوال العام في المناطق المدارية", habitat: "الغابات الجافة والسهول، الهند وأفريقيا", use: "مضغ أوراق النيم أو غسول بزيت النيم", benefit: "مطهر قوي، يقتل بكتيريا التسوس، يمنع الجير" },
+        { name: "أوراق الجوافة", growth: "طوال العام (دائمة الخضرة)", habitat: "المناطق الاستوائية، تزرق في الحدائق", use: "مضغ الأوراق الطازجة أو غليها كغسول", benefit: "تقوي اللثة، توقف النزيف، تقلل الالتهاب" },
+        { name: "إكليل الجبل", growth: "مارس - مايو (الربيع)", habitat: "المناطق الجبلية البحرية، حوض المتوسط", use: "غسول فم بمغلي الأوراق", benefit: "مضاد للأكسدة، يمنع رائحة الفم، يطهر اللثة" },
+        { name: "البقدونس", growth: "طوال العام في المناطق المعتدلة", habitat: "الحدائق والمناطق الرطبة", use: "مضغ أوراق طازجة بعد الوجبات", benefit: "يعطر النفس، يقلل البكتيريا، ينظف الأسنان" },
+        { name: "الريحان", growth: "مايو - سبتمبر (الصيف)", habitat: "المناطق الاستوائية والدافئة", use: "مضغ الأوراق أو غسول بزيت الريحان", benefit: "مضاد للبكتيريا والالتهابات" },
+        { name: "الكرفس", growth: "طوال العام في المناطق المعتدلة", habitat: "الأراضي الرطبة والحدائق", use: "مضغ سيقان الكرفس الطازجة", benefit: "ينظف الأسنان أثناء المضغ، يحفز اللعاب" },
+        { name: "الكمون", growth: "أبريل - يونيو (الربيع)", habitat: "المناطق الجافة وشبه الصحراوية", use: "مضغ البذور أو غسول مغلي", benefit: "مضاد للبكتيريا، يقوي اللثة" },
+        { name: "المورينغا", growth: "طوال العام في المناطق المدارية", habitat: "المناطق الاستوائية وشبه الصحراوية", use: "مسحوق معجون أو غسول مغلي", benefit: "مضادة للبكتيريا، مقوية للثة" },
+        { name: "الجينكو بيلوبا", growth: "سبتمبر - أكتوبر (الخريف)", habitat: "الغابات المعتدلة، شرق آسيا", use: "شاي الأوراق كغسول", benefit: "يحسن الدورة الدموية في اللثة" },
+        { name: "النعناع البري", growth: "يونيو - أغسطس (الصيف)", habitat: "الأراضي البور والطرقات، أوروبا", use: "مضغ الأوراق أو زيت مخفف", benefit: "مضاد للبكتيريا ومنعش للفم" },
+        { name: "الريحان الهندي (Tulsi)", growth: "طوال العام في المناطق الحارة", habitat: "المناطق الاستوائية، الهند", use: "مضغ الأوراق أو غرغرة بمغلي", benefit: "مضاد للجراثيم، يقلل الالتهاب" },
+        { name: "بذور السمسم", growth: "يونيو - أغسطس (الصيف)", habitat: "المناطق الحارة، أفريقيا وآسيا", use: "مضغ البذور أو فرك الأسنان بها", benefit: "تنظف الأسنان طبيعياً، تقلل البلاك" },
+        { name: "قشور الرمان", growth: "سبتمبر - نوفمبر (الخريف)", habitat: "المناطق الجبلية وشبه الجافة", use: "غلي القشور واستخدامها كغسول", benefit: "مضاد للبكتيريا، يقوي اللثة" },
+        { name: "الخزامى (Lavender)", growth: "يونيو - أغسطس (الصيف)", habitat: "المناطق الجبلية والصخرية", use: "غسول فم بزيت الخزامى المخفف", benefit: "مضاد للبكتيريا، يهدئ اللثة الملتهبة" },
+        { name: "بذور الحلبة", growth: "أبريل - يونيو (الربيع)", habitat: "المناطق الجافة، آسيا وأوروبا", use: "مضغ البذور أو غسول مغلي", benefit: "مضاد للبكتيريا، يحسن صحة اللثة" },
+        { name: "الكافور", growth: "طوال العام في الغابات", habitat: "الغابات الاستوائية، أستراليا وآسيا", use: "زيت الكافور المخفف للغرغرة", benefit: "مضاد للبكتيريا، مسكن للألم" },
+        { name: "أوراق الزيتون", growth: "طوال العام (شجرة دائمة)", habitat: "المناطق المتوسطية الجبلية", use: "مضغ الأوراق الطازجة أو شاي مغلي", benefit: "مضاد للبكتيريا، يقلل الالتهاب" },
+        { name: "العسل مع الزعتر", growth: "طوال العام (العسل طبيعي)", habitat: "مناحل في الجبال والحقول", use: "مزج ملعقة عسل مع مسحوق الزعتر، يوضع على اللثة", benefit: "مضاد حيوي طبيعي، يعقم الفم" }
+    ];
+
+    const container = document.getElementById('herbsGrid');
+    herbs.forEach((herb, index) => {
+        const card = document.createElement('div');
+        card.className = 'herb-card';
+        card.innerHTML = `
+            <div class="card-header">
+                <h3><i class="fas fa-seedling"></i> ${herb.name}</h3>
+            </div>
+            <div class="card-body">
+                <div class="info-row"><i class="fas fa-calendar-alt"></i><strong>⏰ وقت النمو:</strong><span class="info-text">${herb.growth}</span></div>
+                <div class="info-row"><i class="fas fa-map-marker-alt"></i><strong>📍 بيئة التواجد:</strong><span class="info-text">${herb.habitat}</span></div>
+                <div class="info-row"><i class="fas fa-hands"></i><strong>🧴 طريقة الاستخدام:</strong><span class="info-text">${herb.use}</span></div>
+                <div class="benefit"><i class="fas fa-star-of-life"></i> <strong>الفوائد:</strong> ${herb.benefit}</div>
+            </div>
+        `;
+        container.appendChild(card);
+    });
+</script>
+</body>
+</html>

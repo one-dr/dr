@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+    <title>طوارئ الأسنان - العيادة السنية الحديثة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(145deg, #fef9e6 0%, #fff5e6 100%);
+            color: #1e2a3e;
+            line-height: 1.5;
+            padding: 16px 12px 40px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* رأس الصفحة */
+        .header {
+            background: white;
+            border-radius: 28px;
+            padding: 14px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .logo h1 {
+            font-size: 1.2rem;
+            color: #b23c1c;
+        }
+        .logo p {
+            font-size: 0.7rem;
+            color: #7a4c3c;
+        }
+        .back-btn {
+            background: #b23c1c;
+            color: white;
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .back-btn:hover {
+            background: #8b2e14;
+        }
+
+        /* تحذير الطوارئ */
+        .emergency-alert {
+            background: #ffefe5;
+            border-right: 8px solid #d9534f;
+            border-radius: 28px;
+            padding: 18px;
+            margin-bottom: 24px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.05);
+        }
+        .emergency-alert h2 {
+            color: #d9534f;
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .emergency-alert p {
+            font-size: 0.9rem;
+            color: #4a2a1a;
+        }
+        .warning-box {
+            background: #fff0d9;
+            border-radius: 24px;
+            padding: 14px;
+            margin: 12px 0;
+            border: 1px solid #ffc107;
+        }
+
+        /* قسم الإجراءات السريعة */
+        .section-title {
+            font-size: 1.5rem;
+            margin: 24px 0 12px;
+            color: #b23c1c;
+            border-right: 5px solid #f4a261;
+            padding-right: 14px;
+        }
+
+        .steps-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+
+        .step-card {
+            background: white;
+            border-radius: 24px;
+            padding: 16px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            border: 1px solid #ffe0cc;
+            transition: 0.2s;
+        }
+        .step-card:active {
+            background: #fff5ea;
+        }
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        .step-number {
+            background: #f4a261;
+            color: white;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 60px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        .step-title {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: #2c3e50;
+        }
+        .step-desc {
+            font-size: 0.85rem;
+            color: #5a5a5a;
+            padding-right: 44px;
+        }
+
+        /* بطاقات نصائح سريعة */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 12px;
+            margin: 20px 0;
+        }
+        .tip-card {
+            background: #ffffffcc;
+            backdrop-filter: blur(4px);
+            border-radius: 20px;
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ffd8b5;
+        }
+        .tip-card i {
+            font-size: 1.6rem;
+            color: #e76f51;
+            margin-bottom: 6px;
+            display: block;
+        }
+        .tip-card span {
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* تحذير نهائي */
+        .footer-warning {
+            background: #2c1a0e;
+            color: #ffddb0;
+            border-radius: 28px;
+            padding: 16px;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.8rem;
+        }
+        .footer-warning a {
+            color: #f4a261;
+            text-decoration: none;
+        }
+
+        @media (min-width: 600px) {
+            .steps-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <div class="logo">
+            <h1>🦷 العيادة السنية الحديثة</h1>
+            <p>د. محمد محمود الأحمد | طوارئ الأسنان</p>
+        </div>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-right"></i> الرئيسية</a>
+    </div>
+
+    <div class="emergency-alert">
+        <h2><i class="fas fa-exclamation-triangle"></i> هل أنت بعيد عن الطبيب؟</h2>
+        <p>هذه الإجراءات <strong>مؤقتة</strong> لتخفيف الألم فقط. لا تغني عن زيارة طبيب الأسنان فوراً.</p>
+        <div class="warning-box">
+            <i class="fas fa-child"></i> <strong>للأطفال:</strong> تجنب الزيوت المركزة أو محلول الأكسجين القوي.<br>
+            <i class="fas fa-thermometer-high"></i> <strong>إذا كان هناك تورم كبير، حرارة، أو صديد</strong> → توجه للطوارئ فوراً.
+        </div>
+    </div>
+
+    <div class="section-title">
+        <i class="fas fa-clock"></i> إجراءات فورية لتخفيف الألم (55 خطوة عملية)
+    </div>
+    <div class="steps-grid" id="emergencySteps">
+        <!-- سيتم ملء الإجراءات عبر JavaScript مع الحفاظ على المحتوى الكامل -->
+    </div>
+
+    <div class="section-title">
+        <i class="fas fa-lightbulb"></i> نصائح ذهبية أثناء الطوارئ
+    </div>
+    <div class="tips-grid">
+        <div class="tip-card"><i class="fas fa-hand-peace"></i><span>لا تضع الأسبرين مباشرة على السن</span></div>
+        <div class="tip-card"><i class="fas fa-thermometer-half"></i><span>كمادات باردة من الخارج</span></div>
+        <div class="tip-card"><i class="fas fa-tint"></i><span>اشرب ماء بارد (ليس مثلجاً)</span></div>
+        <div class="tip-card"><i class="fas fa-utensils"></i><span>تجنب الأكل على الجهة المؤلمة</span></div>
+        <div class="tip-card"><i class="fas fa-bed"></i><span>ارفع رأسك أثناء النوم</span></div>
+        <div class="tip-card"><i class="fas fa-tooth"></i><span>لا تحاول خلع السن بنفسك</span></div>
+    </div>
+
+    <div class="footer-warning">
+        <i class="fas fa-ambulance"></i> إذا استمر الألم لأكثر من 12 ساعة أو صاحبه تورم في الوجه أو صعوبة في البلع، توجه لأقرب مشفى أو عيادة أسنان فوراً.<br>
+        📞 اتصل بنا على <strong>00963992771933</strong> (واتساب) لحجز موعد طارئ.
+    </div>
+</div>
+
+<script>
+    // قائمة الإجراءات (55 نصيحة سريعة)
+    const emergencyActions = [
+        { title: "ضغط بارد على الخد", desc: "ضع كيس ثلج ملفوف بمنشفة على الخد من الخارج لمدة 15 دقيقة، يخفف التورم والألم." },
+        { title: "مضغ ثلج ملفوف", desc: "قطعة ثلج صغيرة ملفوفة بقطعة قماش نظيفة، وضعها داخل الفم على المنطقة الملتهبة (لمنع الحروق)." },
+        { title: "غرغرة بماء دافئ وملح", desc: "ملعقة صغيرة ملح في كوب ماء دافئ، تمضمض به 30 ثانية، يقلل الالتهاب." },
+        { title: "شاي أخضر دافئ", desc: "غرغرة بشاي أخضر دافئ (بدون سكر) مضاد للبكتيريا ومهدئ." },
+        { title: "زيت القرنفل المخفف", desc: "قطرة من زيت القرنفل مع ملعقة زيت زيتون، توضع على قطنة وتوضع على السن المؤلم." },
+        { title: "مضغ القرنفل", desc: "ضع حبة قرنفل كاملة بين الأسنان المؤلمة وامضغها برفق." },
+        { title: "كمادات دافئة", desc: "إذا كان الألم بسبب التهاب اللثة، استخدم كمادات دافئة على الخد من الخارج." },
+        { title: "أوراق النعناع الطازجة", desc: "امضغ أوراق نعناع طازجة لتخفيف الألم ورائحة الفم." },
+        { title: "شاي البابونج", desc: "غرغرة بشاي بابونج دافئ لتهدئة اللثة الملتهبة." },
+        { title: "ماء وأكسجين 3%", desc: "امزج جزءاً من بيروكسيد الهيدروجين مع جزئين ماء، غرغرة 20 ثانية (لا تبلع)." },
+        { title: "زيت جوز الهند (سحب الزيت)", desc: "مضمضة بزيت جوز الهند لمدة 10 دقائق، يقلل البكتيريا." },
+        { title: "كركم مع ماء", desc: "اصنع عجينة من الكركم والماء، وضعها على السن أو اللثة." },
+        { title: "زنجبيل طازج", desc: "امضغ قطعة صغيرة من الزنجبيل الطازج لتسكين الألم." },
+        { title: "زيت زيتون وقرفة", desc: "قطرة قرفة مع ملعقة زيت زيتون، تستخدم كغسول فم دافئ." },
+        { title: "كمادات ملحية دافئة", desc: "قطعة قماش مبللة بماء ملح دافئ توضع على الخد." },
+        { title: "بخار النعناع", desc: "استنشق بخار ماء مغلي مع أوراق نعناع (لا تحرق نفسك)." },
+        { title: "شاي اليانسون", desc: "غرغرة بشاي يانسون دافئ مضاد للبكتيريا." },
+        { title: "ضغط ثلج مباشر (بقطعة قماش)", desc: "ضع ثلجاً ملفوفاً على السن مباشرة لمدة 5 دقائق." },
+        { title: "هلام الصبار", desc: "ضع هلام الألوفيرا على اللثة الملتهبة." },
+        { title: "بذور الحلبة", desc: "امضغ بذور حلبة أو اخلطها مع ماء وضعها على السن." },
+        { title: "ملح البحر", desc: "مضمضة بماء دافئ وملح البحر الخشن." },
+        { title: "ماء بارد", desc: "اشرب ماء بارد لتخفيف الألم المؤقت." },
+        { title: "أوراق الريحان", desc: "امضغ أوراق ريحان طازجة لتهدئة الالتهاب." },
+        { title: "زيت الخردل المخفف", desc: "قطرة زيت خردل مع زيت زيتون، توضع على السن." },
+        { title: "الكمون", desc: "امضغ قليلاً من حبات الكمون." },
+        { title: "زيت الزعتر", desc: "قطرة زيت زعتر مخففة مع ماء للغرغرة." },
+        { title: "تبديل كمادات (بارد/ساخن)", desc: "دقيقة ثلج، دقيقة كمادة دافئة بالتناوب." },
+        { title: "بقدونس طازج", desc: "امضغ بقدونس لتخفيف الرائحة والألم." },
+        { title: "ماء أكسجين مخفف", desc: "غرغرة بماء أكسجين 1.5% لمدة 20 ثانية." },
+        { title: "أوراق الجوافة", desc: "امضغ أوراق جوافة طازجة أو اغليها كغسول." },
+        { title: "تدليك اللثة", desc: "بأصبع نظيف، دلك اللثة برفق بحركات دائرية." },
+        { title: "زيت الخزامى", desc: "قطرة زيت لافندر مع ماء للغرغرة." },
+        { title: "زيت الكافور", desc: "مخفف مع زيت زيتون على السن." },
+        { title: "شاي المورينغا", desc: "غرغرة بشاي المورينغا." },
+        { title: "قرفة مع عسل", desc: "ملعقة عسل + رشة قرفة، توضع على اللثة." },
+        { title: "القرنفل الهندي", desc: "مسحوق القرنفل الهندي مع ماء على السن." },
+        { title: "الريحان الهندي (Tulsi)", desc: "شاي دافئ للغرغرة." },
+        { title: "عسل طبيعي", desc: "ضع قليلاً من العسل على اللثة الملتهبة." },
+        { title: "بخار بابونج", desc: "استنشاق بخار ماء مع البابونج." },
+        { title: "شاي أوراق الزيتون", desc: "غرغرة بمغلي أوراق الزيتون." },
+        { title: "بذور السمسم", desc: "امضغ بذور سمسم لتنظيف الأسنان." },
+        { title: "زيت النعناع للأطفال", desc: "مخفف للغرغرة للأطفال فوق 6 سنوات." },
+        { title: "كرفس طازج", desc: "امضغ سيقان الكرفس الطازج." },
+        { title: "كمادات شاي أسود بارد", desc: "كيس شاي أسود بارد يوضع على الخد." },
+        { title: "شاي عرقسوس", desc: "غرغرة بشاي عرقسوس دافئ." },
+        { title: "محلول ملح خفيف للأطفال", desc: "نصف ملعقة ملح في كوب ماء للأطفال." },
+        { title: "زيت الصندل", desc: "قطرة مع ماء للغرغرة." },
+        { title: "زيت جوجوبا", desc: "مخفف للغرغرة." },
+        { title: "جذور الكرز", desc: "امضغ جذور الكرز الطازجة." },
+        { title: "كركديه مغلي", desc: "غرغرة بمنقوع الكركديه الدافئ." },
+        { title: "عسل وزعتر", desc: "ملعقة عسل مع رشة زعتر، مضمضة." },
+        { title: "غرغرة بالماء الدافئ بعد الأكل", desc: "ينظف بقايا الطعام ويخفف الألم." },
+        { title: "تنظيف لطيف بالفرشاة الناعمة", desc: "فرش الأسنان بلطف لتقليل التهيج." },
+        { title: "استخدام خيط الأسنان بحذر", desc: "أزل بقايا الطعام العالقة برفق دون إيذاء اللثة." },
+        { title: "تجنب الحار والبارد جداً", desc: "تناول طعاماً فاتراً لتقليل الحساسية." }
+    ];
+
+    // عرض أول 55 إجراءً (التأكد من العدد)
+    const stepsContainer = document.getElementById('emergencySteps');
+    if (stepsContainer) {
+        emergencyActions.slice(0, 55).forEach((action, index) => {
+            const card = document.createElement('div');
+            card.className = 'step-card';
+            card.innerHTML = `
+                <div class="step-header">
+                    <div class="step-number">${index+1}</div>
+                    <div class="step-title">${action.title}</div>
+                </div>
+                <div class="step-desc">${action.desc}</div>
+            `;
+            stepsContainer.appendChild(card);
+        });
+    }
+
+    // إضافة تأثيرات لمسية بسيطة
+    const cards = document.querySelectorAll('.step-card');
+    cards.forEach(card => {
+        card.addEventListener('touchstart', function() {
+            this.style.backgroundColor = '#fff5ea';
+            setTimeout(() => { this.style.backgroundColor = ''; }, 150);
+        });
+    });
+</script>
+</body>
+</html>

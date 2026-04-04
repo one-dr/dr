@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حقائق وعجائب الأسنان - العيادة السنية الحديثة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{background:#0d1b2a;font-family:'Tajawal';padding:20px;color:#e0e1dd;}
+        .container{max-width:1100px;margin:auto;}
+        h1{text-align:center;font-size:2rem;color:#ff9f1c;margin-bottom:8px;}
+        .sub{text-align:center;color:#8ab;margin-bottom:30px;}
+        .fact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px;}
+        .fact-card{background:#1b2a3a;border-radius:28px;padding:20px;transition:0.2s;border-bottom:4px solid #ff9f1c;position:relative;}
+        .fact-card:hover{background:#253c4e;transform:scale(1.01);}
+        .fact-icon{font-size:2rem;position:absolute;top:15px;left:20px;opacity:0.2;}
+        .fact-number{background:#ff9f1c;color:#0d1b2a;width:35px;height:35px;display:inline-flex;align-items:center;justify-content:center;border-radius:40px;font-weight:800;margin-bottom:12px;}
+        .fact-text{font-size:0.95rem;line-height:1.5;margin-top:8px;}
+        footer{text-align:center;margin-top:45px;color:#6a8e9e;font-size:0.75rem;}
+        @media (max-width:600px){.fact-grid{grid-template-columns:1fr;}}
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🧠 حقائق وعجائب طبية وبيولوجية</h1>
+    <div class="sub">30 حقيقة صادمة ومذهلة عن أسنانك وجسمك</div>
+    <div class="fact-grid" id="factsGrid"></div>
+    <footer>حقائق موثقة من الأبحاث العلمية | العيادة السنية الحديثة</footer>
+</div>
+<script>
+    const weirdFacts = [
+        "الأسنان تبدأ بالتكون في الأسبوع السادس من الحمل، أي قبل أن تعرف أمك أنها حامل غالباً.",
+        "المينا هي النسيج الوحيد في الجسم الذي لا يحتوي على خلايا حية ولا يمكنه تجديد نفسه.",
+        "يوجد في فم الإنسان أكثر من 700 نوع مختلف من البكتيريا، بعضها مفيد وبعضها خطير.",
+        "اللعاب يحتوي على مسكن ألم طبيعي أقوى من المورفين بـ 6 مرات يسمى (أوبيورفين).",
+        "الإنسان يقضي حوالي 38.5 يوماً من حياته في تفريش أسنانه فقط.",
+        "بصمة الأسنان تُستخدم في التحقيقات الجنائية لأنها أقوى من الحمض النووي (DNA) في تحمل النار.",
+        "أسنانك الطبيعية تعكس الأشعة فوق البنفسجية، فتتوهج باللون الأزرق الفاتح تحت الضوء الأسود.",
+        "قوة مضغ الإنسان العادي تصل إلى 200 باوند على الأضراس الخلفية (أكثر من 90 كجم).",
+        "الجذور تمثل ثلثي طول السن الفعلي، فما تراه في فمك هو الثلث فقط.",
+        "الأسنان هي العضو الوحيد الجاهز للهضم قبل أن يصل الطعام للمعدة (بالتقطيع والطحن).",
+        "فقدان الأسنان الخلفية يؤدي إلى قصر طول الوجه وظهور التجاعيد حول الفم مبكراً.",
+        "اللثة الصحية لا تنزف أبداً، النزيف هو علامة مؤكدة على وجود مرض بكتيري.",
+        "الترسيبات الجيرية (القلح) هي في الواقع أجساد بكتيريا ميتة تكلست بفعل أملاح اللعاب.",
+        "الأسنان الأمامية مصممة كـ 'مقص' والخلفية كـ 'مطحنة' لتمزيق وطحن الطعام.",
+        "هناك ارتباط وثيق بين أمراض اللثة وزهايمر وفقاً لدراسات حديثة من جامعة هارفارد.",
+        "الأسنان الغارزة (Impacted Teeth) هي أسنان نمت بالعرض داخل العظم ولم تتمكن من الخروج.",
+        "شرب الماء بكثرة هو أفضل منظف طبيعي للأسنان بين الوجبات.",
+        "السكر لا يدمر الأسنان مباشرة، بل فضلات البكتيريا الحمضية التي تتغذى على السكر هي ما يذيب المينا.",
+        "لون الأسنان يعتمد على سماكة المينا؛ كلما كانت أرق، ظهر لون العاج الأصفر تحتها.",
+        "التنفس من الفم أثناء النوم يقلل اللعاب ويزيد نسبة التسوس بنسبة 50%.",
+        "صرير الأسنان الليلي (Bruxism) ينتج قوة تكفي لكسر قشرة الجوز الصلبة.",
+        "الجبن يحتوي على الكالسيوم والفوسفات التي تعيد بناء مينا الأسنان المتضررة من الأحماض.",
+        "المشروبات الغازية الدايت تدمر الأسنان أيضاً بسبب الأحماض (حمض الستريك والفوسفوريك) وليس السكر.",
+        "التفاح يعمل كفرشاة أسنان طبيعية لكنه يحتوي على سكر وحمض، لذا اغسل فمك بعده.",
+        "بعض الأورام تسمى 'أورام سنية' (Odontomas) وهي مجرد كتل من أسنان صغيرة غير منتظمة تنمو داخل الفك.",
+        "الأسنان لها 'ذاكرة' عضلية، ولهذا تتحرك للعودة لمكانها الأصلي بعد إزالة التقويم.",
+        "زراعة الأسنان تحفز نمو العظم، تماماً كما تفعل الجذور الطبيعية، وتمنع ضمور الفك.",
+        "أطباء الأسنان ينصحون بالانتظار 30 دقيقة بعد أكل الحمضيات قبل تفريش الأسنان لمنع خدش المينا اللينة.",
+        "الفلورايد يحول 'الهيدروكسي أباتيت' إلى 'فلورو أباتيت' وهو مركب أصلب وأقل ذوباناً في الأحماض.",
+        "يمكن استخدام أسنان المريض المخلوعة وطحنها لتصبح 'طعم عظمي' لزراعة أسنان جديدة لنفس المريض (تقنية ذاتية)."
+    ];
+    const container = document.getElementById('factsGrid');
+    weirdFacts.forEach((fact, i) => {
+        const card = document.createElement('div');
+        card.className = 'fact-card';
+        card.innerHTML = `<div class="fact-icon">🦷</div><div class="fact-number">${i+1}</div><div class="fact-text">⚡ ${fact}</div>`;
+        container.appendChild(card);
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حقائق سريعة ومدهشة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{background:#fffbee;font-family:'Tajawal';padding:20px;}
+        .container{max-width:1000px;margin:auto;}
+        h1{text-align:center;color:#d97706;font-size:2rem;}
+        .sub{text-align:center;margin-bottom:25px;}
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;}
+        .quick-card{background:white;border-radius:20px;padding:14px;box-shadow:0 4px 10px rgba(0,0,0,0.05);border:1px solid #ffe4b5;transition:0.2s;}
+        .quick-card:hover{transform:scale(1.01);background:#fff4e0;}
+        .emoji{font-size:1.3rem;margin-left:6px;}
+        footer{text-align:center;margin-top:35px;color:#b5670a;}
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>✨ حقائق سريعة ومدهشة</h1>
+    <div class="sub">37 معلومة خاطفة عن أسنانك</div>
+    <div class="grid" id="quickGrid"></div>
+    <footer>معلومة واحدة في كل بطاقة – شاركها مع أصدقائك</footer>
+</div>
+<script>
+    const facts = [
+        "الأسنان هي الجزء الوحيد الذي لا يمكنه النمو مرة أخرى عند البشر.",
+        "تبييض الأسنان لا يزيل المينا، بل يفتح المسام لإزالة التصبغات.",
+        "شرب الماء المفلور يقلل التسوس بنسبة 25%.",
+        "معظم الناس يفضلون الفرشاة الزرقاء على الحمراء.",
+        "مضغ العلكة الخالية من السكر يحمي الأسنان بزيادة تدفق اللعاب.",
+        "السكر الموجود في الفواكه أقل ضرراً بكثير من السكر المضاف.",
+        "غسول الفم لا يغني أبداً عن الفرشاة والخيط.",
+        "الأسنان تزداد صلابة مع تقدم العمر ولكنها تصبح أكثر عرضة للكسر.",
+        "بعض الناس لديهم فوبيا من طبيب الأسنان تسمى 'أودونتوفوبيا'.",
+        "زيارة العيادة السنية الحديثة كل 6 أشهر توفر عليك سنوات من الألم!",
+        "الفرشاة الكهربائية تزيل البلاك بنسبة 21% أكثر من اليدوية.",
+        "لا تفرش أسنانك مباشرة بعد التقيؤ، انتظر 30 دقيقة.",
+        "استخدام خيط الأسنان يضيف 6 سنوات لعمر أسنانك.",
+        "الأسنان البيضاء طبيعياً ليست بيضاء نقية بل عاجية.",
+        "الابتسامة تجعلك تبدو أصغر سناً بـ 5 سنوات.",
+        "الأسنان تتأثر بالعوامل الوراثية بنسبة 60%.",
+        "شرب الشاي بدون سكر يقلل من التسوس.",
+        "الكركم يبيض الأسنان طبيعياً.",
+        "الفراولة تحتوي على حمض الماليك الذي يبيض الأسنان.",
+        "الموز غني بالبوتاسيوم والمغنيسيوم لصحة اللثة.",
+        "قضم الثلج قد يكسر الأسنان.",
+        "استخدام الأسنان لفتح العبوات يسبب تشققات.",
+        "الضغط على الأسنان أثناء الرياضة يستخدم واقياً.",
+        "تناول الجزر والكرفس ينظف الأسنان أثناء المضغ.",
+        "التفاح ينظف الأسنان لكنه يحتوي على سكر وحمض.",
+        "الحليب يحمي الأسنان بالكالسيوم والفوسفات.",
+        "الزبادي يقلل من بكتيريا الفم الضارة.",
+        "اللوز مصدر جيد للكالسيوم.",
+        "السبانخ تحتوي على أكسالات قد تمنع امتصاص الكالسيوم.",
+        "البيض مصدر ممتاز لفيتامين د.",
+        "السمك غني بفيتامين د وأوميغا 3 لصحة اللثة.",
+        "الفيتامين C مهم للثة، نقصه يسبب نزيفاً.",
+        "فيتامين A يساعد في تكوين المينا.",
+        "الفلورايد يمنع التسوس حتى في البالغين.",
+        "السواك يحتوي على مواد مضادة للبكتيريا.",
+        "زيت القرنفل مخدر طبيعي.",
+        "المضمضة بزيت جوز الهند (سحب الزيت) تقلل البكتيريا."
+    ];
+    const grid = document.getElementById('quickGrid');
+    facts.forEach((f,i)=>{
+        const card = document.createElement('div');
+        card.className = 'quick-card';
+        card.innerHTML = `<div><span class="emoji">⚡</span> ${f}</div>`;
+        grid.appendChild(card);
+    });
+</script>
+</body>
+</html>

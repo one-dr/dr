@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>قوة ومتانة الأسنان - حقائق مذهلة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #1a2a3a 0%, #0f1a24 100%);
+            color: #e0e0e0;
+            padding: 20px 16px 50px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .header h1 { font-size: 2rem; color: #ffd966; border-bottom: 2px solid #ffd966; display: inline-block; padding-bottom: 8px; }
+        .header p { margin-top: 10px; color: #ccc; }
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+        .fact-card {
+            background: rgba(30, 40, 50, 0.8);
+            backdrop-filter: blur(4px);
+            border-radius: 28px;
+            padding: 20px;
+            border: 1px solid #ffd96633;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .fact-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); background: #2a3a4a; }
+        .fact-number { font-size: 2rem; font-weight: 800; color: #ffd966; opacity: 0.7; margin-bottom: 8px; }
+        .fact-text { font-size: 1rem; line-height: 1.5; font-weight: 500; }
+        footer { text-align: center; margin-top: 40px; font-size: 0.75rem; color: #aaa; }
+        @media (max-width: 600px) { .facts-grid { grid-template-columns: 1fr; } .fact-card { padding: 16px; } }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>💪 قوة ومتانة الأسنان</h1>
+        <p>37 حقيقة عن أصلب مادة في جسم الإنسان</p>
+    </div>
+    <div class="facts-grid" id="factsList"></div>
+    <footer>حقائق علمية موثقة | العيادة السنية الحديثة</footer>
+</div>
+<script>
+    const facts = [
+        "مينا الأسنان هي أصلب مادة في جسم الإنسان على الإطلاق.",
+        "مينا الأسنان تتفوق على العظام في نسبة المعادن (96% معادن).",
+        "الأسنان هي الجزء الوحيد في الجسم الذي لا يمكنه إصلاح نفسه بنفسه.",
+        "قوة إطباق الفك لدى الإنسان تصل إلى 70 كيلوجراماً تقريباً.",
+        "الأسنان يمكن أن تبقى لمئات السنين بعد الوفاة بسبب صلابتها.",
+        "أسنانك تبدأ بالتكون وأنت لا تزال جنيناً في رحم أمك.",
+        "الأسنان ليست عظاماً، بل هي أنسجة متكلسة معقدة.",
+        "الأسنان تحتوي على أعصاب حساسة جداً للضغط والحرارة.",
+        "لون الأسنان الطبيعي يميل للاصفرار قليلاً وليس الأبيض الناصع.",
+        "الفلورايد يساعد في 'إعادة تمعدن' المينا الضعيفة قبل تسوسها.",
+        "المينا هي النسيج الوحيد في الجسم الذي لا يحتوي على خلايا حية.",
+        "قوة مضغ الإنسان العادي تصل إلى 200 باوند على الأضراس الخلفية.",
+        "الجذور تمثل ثلثي طول السن الفعلي (ما تراه هو الثلث فقط).",
+        "الأسنان هي العضو الوحيد الجاهز للهضم قبل وصول الطعام للمعدة.",
+        "فقدان الأسنان الخلفية يؤدي إلى قصر طول الوجه وظهور التجاعيد.",
+        "الترسيبات الجيرية هي بكتيريا ميتة تكلست بأملاح اللعاب.",
+        "الأسنان الأمامية مصممة كمقص والخلفية كمطحنة.",
+        "شرب الماء بكثرة هو أفضل منظف طبيعي للأسنان.",
+        "السكر لا يدمر الأسنان، بل فضلات البكتيريا الحمضية.",
+        "لون الأسنان يعتمد على سماكة المينا؛ كلما كانت أرق ظهر العاج الأصفر.",
+        "التنفس من الفم يقلل اللعاب ويزيد التسوس بنسبة 50%.",
+        "صرير الأسنان الليلي ينتج قوة تكفي لكسر قشرة الجوز.",
+        "الأسنان تنمو بمعدل ميكرومترات يومياً في الطفولة.",
+        "الجبن يعيد بناء مينا الأسنان المتضررة من الأحماض.",
+        "المشروبات الغازية الدايت تدمر الأسنان بسبب الأحماض.",
+        "التفاح يعمل كفرشاة أسنان طبيعية لكنه يحتوي على سكر وحمض.",
+        "بعض الأورام تسمى 'أورام سنية' وهي كتل من أسنان صغيرة داخل الفك.",
+        "الأسنان لها ذاكرة عضلية، فتعود لمكانها بعد إزالة التقويم.",
+        "زراعة الأسنان تحفز نمو العظم وتمنع ضمور الفك.",
+        "الفلورايد يحول الهيدروكسي أباتيت إلى فلورو أباتيت أصلب.",
+        "يمكن استخدام أسنان المريض المخلوعة كطعم عظمي لزراعة جديدة.",
+        "الإنسان يفرز 1-2 لتر من اللعاب يومياً.",
+        "فرشاة الأسنان تحتوي على 2500 شعيرة في المتوسط.",
+        "الجيوب الأنفية قريبة من جذور الأسنان العلوية.",
+        "العصب السني يحتوي على أوعية ليمفاوية تنقي السن.",
+        "تسوس الأسنان هو ثاني أكثر الأمراض شيوعاً بعد نزلات البرد.",
+        "عظام الفك من أكثر عظام الجسم كثافة لدعم المضغ."
+    ];
+    const container = document.getElementById('factsList');
+    facts.forEach((fact, idx) => {
+        const card = document.createElement('div');
+        card.className = 'fact-card';
+        card.innerHTML = `<div class="fact-number">${idx+1}</div><div class="fact-text">🔹 ${fact}</div>`;
+        container.appendChild(card);
+    });
+</script>
+</body>
+</html>
